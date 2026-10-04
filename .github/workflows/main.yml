@@ -3,13 +3,31 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   apk:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack the project
-        run: unzip -oq eat-that-frog-android-project.zip
+      - name: Unpack the project (files already in the repo win)
+        run: unzip -nq eat-that-frog-android-project.zip
+      - name: Use a fixed signing key so updates install over the old app
+        run: |
+          echo "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" | base64 -d > android/app/frog.keystore
+          cat >> android/app/build.gradle <<'EOF'
+
+          android {
+              signingConfigs {
+                  debug {
+                      storeFile file('frog.keystore')
+                      storePassword 'android'
+                      keyAlias 'androiddebugkey'
+                      keyPassword 'android'
+                  }
+              }
+          }
+          EOF
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -30,3 +48,10 @@ jobs:
         with:
           name: eat-that-frog-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Publish the APK on the Releases page
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk eat-that-frog.apk
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest eat-that-frog.apk --title "Latest build" --notes "Built from commit ${GITHUB_SHA::7}" --latest
