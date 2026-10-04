@@ -1,0 +1,7 @@
+{
+  "appId": "com.aniket.eatthatfrog",
+  "appName": "Eat That Frog",
+  "webDir": "www",
+  "backgroundColor": "#0a1a17",
+  "android": { "backgroundColor": "#0a1a17" }
+}
