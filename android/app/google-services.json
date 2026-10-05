@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176543181293",
+    "project_id": "eat-that-frog-d3198",
+    "storage_bucket": "eat-that-frog-d3198.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176543181293:android:b2da1aadb8fc2f2e165fe4",
+        "android_client_info": {
+          "package_name": "com.aniket.eatthatfrog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7pw5NJxrpVtATzySE7sWO-ytKsMQHRPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
