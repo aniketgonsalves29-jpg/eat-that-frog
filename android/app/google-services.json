@@ -12,7 +12,20 @@
           "package_name": "com.aniket.eatthatfrog"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "176543181293-h9hnv36vdv1t4k6vle9qumqp2et47qgb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.eatthatfrog",
+            "certificate_hash": "ed29e063506e33209126173ef44e6399304aac1c"
+          }
+        },
+        {
+          "client_id": "176543181293-m6o0ht6acj2pf48s5qs5mlsi02uq5ipr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB7pw5NJxrpVtATzySE7sWO-ytKsMQHRPw"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176543181293-m6o0ht6acj2pf48s5qs5mlsi02uq5ipr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
