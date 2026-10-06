@@ -92,7 +92,7 @@ h2.sec span{flex:1}
 .wd.now i:not(:has(svg)){border-color:var(--go)}
 .ring{display:block}
 .ring .tr{stroke:var(--s2)}
-.ring .arc{stroke:var(--go);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
+.ring .arc{stroke:var(--gc,var(--go));stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
 main.enter .ring .arc{animation:arc 1.1s .15s var(--ease) both}
 @keyframes arc{from{stroke-dashoffset:var(--c)}to{stroke-dashoffset:var(--to)}}
 .ringwrap{position:relative;flex:none}
@@ -243,6 +243,33 @@ main.enter .bars i{animation:rise .7s .15s var(--ease) both}
 .focus .msg{text-align:center;margin-bottom:14px}
 .focus .msg b{font-size:22px;display:block}
 
+
+/* pickers, account, tour, templates */
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pick button{min-width:44px;height:44px;border-radius:14px;border:2px solid var(--line);background:var(--bg);font-size:22px;padding:0 10px;color:var(--ink);transition:transform .15s var(--spring)}
+.pick button:active{transform:scale(.9)}
+.pick button.on{border-color:var(--go);background:color-mix(in srgb,var(--go) 18%,var(--bg))}
+.pick.multi button{font-size:14px;font-weight:650;height:40px;min-width:48px}
+.pick button.sw2{border-radius:50%;width:38px;min-width:38px;height:38px;padding:0;border-color:transparent}
+.pick button.sw2.on{outline:3px solid var(--ink);outline-offset:2px}
+.sw3{display:flex;gap:12px;margin-top:6px}
+.sw3 button{width:40px;height:40px;border-radius:50%;border:0;padding:0}
+.sw3 button.on{outline:3px solid var(--ink);outline-offset:2px}
+.avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;background:var(--go);color:var(--goInk);display:grid;place-items:center;font-weight:760;font-size:19px;flex:none}
+.gbtn{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;color:#4285F4;font-weight:800;font-size:14px}
+.tour{position:fixed;inset:0;z-index:90;background:radial-gradient(circle at 50% 25%,var(--s2),var(--bg) 75%);display:flex;flex-direction:column;padding:var(--top) 24px calc(24px + var(--bot));animation:fade .4s both}
+.tour .sl{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;animation:enter .5s var(--ease) both}
+.tour .art{width:170px;min-height:150px;display:grid;place-items:center;color:var(--go);font-size:84px}
+.tour h2{margin:6px 0 0;font-size:30px;line-height:1.1;font-weight:760;letter-spacing:-.03em;max-width:330px}
+.tour p{margin:0;color:var(--mute);max-width:330px;font-size:16.5px;line-height:1.45}
+.tour .dots{display:flex;gap:8px;justify-content:center;margin:14px 0}
+.tour .dots i{width:8px;height:8px;border-radius:9px;background:var(--line);transition:all .3s var(--ease)}
+.tour .dots i.on{width:24px;background:var(--go)}
+.tour .bar2{display:flex;flex-direction:column;gap:10px;align-items:stretch;width:100%;max-width:420px;margin:0 auto}
+.tour .bar2 .btn{justify-content:center}
+.card-prev{width:100%;max-width:340px;border-radius:18px;display:block;margin:6px auto 16px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.menu .tpl .emo{font-size:30px;flex:none}
+
 /* splash */
 #splash{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s ease,transform .6s var(--ease)}
 #splash.go{opacity:0;transform:scale(1.06);pointer-events:none}
@@ -257,6 +284,64 @@ main.enter .bars i{animation:rise .7s .15s var(--ease) both}
 #splash p{margin:0;color:var(--mute);animation:enter .7s 1.15s var(--ease) both}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
+
+/* login + app lock */
+.login{position:fixed;inset:0;z-index:95;background:radial-gradient(120% 70% at 50% 0%,var(--s2),var(--bg) 70%);display:flex;flex-direction:column;padding:var(--top) 24px calc(22px + var(--bot));animation:fade .35s both;overflow:auto}
+.login .x{align-self:flex-end;width:40px;height:40px;border-radius:50%;border:0;background:var(--s1);color:var(--mute);font-size:22px;line-height:1;display:grid;place-items:center}
+.login .hero2{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:10px 0;animation:enter .55s var(--ease) both}
+.login .orb{position:relative;width:170px;height:150px;display:grid;place-items:center}
+.login .orb svg{width:150px;height:auto;position:relative;z-index:1;animation:float 4s ease-in-out infinite}
+.login .orb .rp{position:absolute;left:50%;bottom:10px;width:150px;height:46px;margin-left:-75px;border-radius:50%;border:2px solid var(--go);opacity:0;animation:rpl 3.4s ease-out infinite}
+.login .orb .rp:nth-child(2){animation-delay:1.7s}
+@keyframes rpl{0%{transform:scale(.5);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+@keyframes float{50%{transform:translateY(-7px)}}
+.login h1{margin:8px 0 0;font-size:32px;line-height:1.08;font-weight:780;letter-spacing:-.035em;max-width:320px}
+.login h1 em{font-style:normal;color:var(--go)}
+.login h2{margin:6px 0 0;font-size:28px;font-weight:760;letter-spacing:-.03em}
+.login p{margin:0;color:var(--mute);font-size:16px;line-height:1.45;max-width:320px}
+.login .bar2{display:flex;flex-direction:column;gap:10px;width:100%;max-width:420px;margin:0 auto}
+.login .bar2 .btn{justify-content:center;padding:15px 20px;font-size:16px;width:100%}
+.login .btn.g{background:#fff;color:#1f1f1f}
+.login .btn.g .gbtn{background:none;font-size:19px;background:linear-gradient(90deg,#4285F4,#EA4335 40%,#FBBC05 70%,#34A853);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.login .btn[disabled]{opacity:.55;pointer-events:none}
+.login .fine{color:var(--mute);font-size:12.5px;text-align:center;margin:14px auto 0;max-width:330px;line-height:1.45}
+.login .fine b{color:var(--ink);font-weight:650}
+.login .back{align-self:flex-start;border:0;background:var(--s1);color:var(--ink);width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.login .form{width:100%;max-width:420px;margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;animation:enter .45s var(--ease) both}
+.login .form .t{text-align:left}
+.login .form .t p{max-width:none;margin-top:6px}
+.phone{display:flex;gap:8px}
+.phone select{width:112px;flex:none;padding-right:6px;font-weight:650}
+.phone input{flex:1;letter-spacing:.04em;font-weight:600;font-size:19px}
+.login .err{min-height:20px;color:#ff7a6b;font-size:14px;font-weight:600}
+.otp{position:relative;display:flex;gap:9px;justify-content:space-between}
+.otp>input{position:absolute;inset:0;opacity:0;width:100%;height:100%;font-size:16px}
+.otp i{flex:1;height:58px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);display:grid;place-items:center;font-style:normal;font-size:25px;font-weight:720;transition:border-color .2s,transform .2s var(--spring)}
+.otp i.on{border-color:var(--go);transform:translateY(-2px)}
+.otp.bad{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+.login .resend{background:none;border:0;color:var(--go);font-weight:650;font-size:15px;padding:8px}
+.login .resend[disabled]{color:var(--mute)}
+.spin{width:18px;height:18px;border-radius:50%;border:2.5px solid currentColor;border-right-color:transparent;animation:spin .7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pinov{position:fixed;inset:0;z-index:300;background:radial-gradient(120% 70% at 50% 0%,var(--s2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;padding:var(--top) 24px calc(18px + var(--bot));animation:fade .25s both}
+.pinov .top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+.pinov .top svg.frog{width:84px;height:auto}
+.pinov h2{margin:8px 0 0;font-size:24px;font-weight:760;letter-spacing:-.02em}
+.pinov .sub{color:var(--mute);font-size:15px;min-height:22px;max-width:300px}
+.pinov .sub.bad{color:#ff7a6b;font-weight:600}
+.pdots{display:flex;gap:16px;margin:14px 0 4px}
+.pdots i{width:15px;height:15px;border-radius:50%;border:2px solid var(--mute);transition:all .2s var(--spring)}
+.pdots i.on{background:var(--go);border-color:var(--go);transform:scale(1.15)}
+.pdots.bad{animation:shake .4s}
+.pad{display:grid;grid-template-columns:repeat(3,76px);gap:14px 22px;margin:8px 0 12px}
+.pad button{width:76px;height:76px;border-radius:50%;border:0;background:var(--s1);color:var(--ink);font-size:28px;font-weight:600;display:grid;place-items:center;transition:transform .12s var(--spring),background .2s}
+.pad button:active{transform:scale(.9);background:var(--s2)}
+.pad button.nul{visibility:hidden}
+.pad button svg{width:26px;height:26px}
+.pinov .lnk{background:none;border:0;color:var(--mute);font-size:14px;padding:8px}
+.pincover{position:fixed;inset:0;z-index:299;background:var(--bg)}
+.seg3{display:flex;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -266,6 +351,7 @@ main.enter .bars i{animation:rise .7s .15s var(--ease) both}
 <button class="fab" id="fab"></button>
 <nav id="nav"><span class="ind"></span></nav>
 <canvas id="confetti"></canvas>
+<script src="cloud-config.js"></script>
 
 <script>
 /* ---------- basics ---------- */
@@ -277,6 +363,7 @@ const today=()=>fmt(new Date());
 const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return fmt(d)};
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const IC={
+ phone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/>',lock:'<rect x="5" y="11" width="14" height="9.5" rx="2.5"/><path d="M8 11V8a4 4 0 018 0v3"/>',shield:'<path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6z"/><path d="M9 12l2.2 2.2L15 10"/>',
  leaf:'<path d="M5 19c0-8.5 5-14 14-14 0 9-5.5 14-14 14z"/><path d="M5 19l7-7"/>',
  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
  route:'<circle cx="6" cy="5.5" r="2"/><circle cx="18" cy="18.5" r="2"/><path d="M8 5.5h6.5a3.5 3.5 0 010 7h-5a3.5 3.5 0 000 7H16"/>',
@@ -292,7 +379,9 @@ const IC={
  bell:'<path d="M6 17v-6a6 6 0 0112 0v6l2 2H4l2-2zM10 21.5h4"/>',
  share:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',
  bolt:'<path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/>',
- x:'<path d="M6 6l12 12M18 6L6 18"/>'
+ x:'<path d="M6 6l12 12M18 6L6 18"/>',
+ snow:'<path d="M12 3v18M4.5 7.5l15 9M19.5 7.5l-15 9"/>',
+ cal:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>'
 };
 const ic=(n,s)=>`<svg class="i" viewBox="0 0 24 24"${s?` style="font-size:${s}px"`:''}>${IC[n]}</svg>`;
 
@@ -310,12 +399,15 @@ function seed(){
 }
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 if(!S||!S.goals)S=seed();
-function ensure(){S.frogs=S.frogs||{};S.reviewed=S.reviewed||{};S.frogDone=S.frogDone||{};S.theme=S.theme||'auto';S.haptics=S.haptics!==false;S.name=S.name||'';S.xp=S.xp||0;S.focus=S.focus||{};S.focusGoal=S.focusGoal||{};S.badges=S.badges||{};S.wins=S.wins||{};S.remind=S.remind||{on:false,time:'07:30'}}
+function ensure(){S.frogs=S.frogs||{};S.reviewed=S.reviewed||{};S.frogDone=S.frogDone||{};S.theme=S.theme||'auto';S.haptics=S.haptics!==false;S.name=S.name||'';S.xp=S.xp||0;S.focus=S.focus||{};S.focusGoal=S.focusGoal||{};S.badges=S.badges||{};S.wins=S.wins||{};S.remind=S.remind||{on:false,time:'07:30'};S.weekly=S.weekly||{};S.freezes=S.freezes==null?1:S.freezes;S.sound=S.sound!==false;S.accent=S.accent||'lily'}
 ensure();
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};save();
+const save=stamp=>{try{if(stamp!==false)S.updatedAt=Date.now();localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(stamp!==false&&typeof queueSync==='function')queueSync()};save(false);
+const ACC={lily:['#b8e6b9','#1f6b47','#08241a'],ocean:['#9fd2ff','#1f6fb5','#062338'],sunset:['#ffc28f','#c2570c','#3a1a05'],berry:['#f6b8dc','#a8326f','#3a0a26'],gold:['#ffd86b','#9a6a00','#3a2a00']};
 function applyTheme(){
   document.documentElement.dataset.theme=S.theme;
   const dark=S.theme==='dark'||(S.theme==='auto'&&!matchMedia('(prefers-color-scheme:light)').matches);
+  const a=ACC[S.accent]||ACC.lily,st=document.documentElement.style;
+  st.setProperty('--go',dark?a[0]:a[1]);st.setProperty('--goInk',dark?a[2]:'#fff');
   document.querySelector('meta[name=theme-color]').content=dark?'#0a1a17':'#eef4ec';
 }
 applyTheme();
@@ -337,8 +429,8 @@ function due(d){
 }
 const pri=p=>`<span><i class="dot d${p}"></i>${PR[p]}</span>`;
 function streakOf(log){const s=new Set(log);let d=today(),n=0;if(!s.has(d))d=addDays(d,-1);while(s.has(d)){n++;d=addDays(d,-1)}return n}
-const streak=g=>streakOf(g.habitLog);
-function overallStreak(){const a=[];S.goals.forEach(g=>a.push(...g.habitLog));return streakOf(a)}
+const streak=g=>streakGoal(g);
+function overallStreak(){const a=[];S.goals.forEach(g=>a.push(...g.habitLog,...(g.frozen||[])));return streakOf(a)}
 const unlocked=(g,t)=>!t.after||(g.tasks.find(x=>x.id===t.after)||{done:true}).done;
 function nextTasks(){
   const out=[];
@@ -357,13 +449,13 @@ const QUOTES=['Do the hardest thing first, and the day gets lighter.','Small ste
 const quote=()=>QUOTES[Math.floor(Date.now()/864e5)%QUOTES.length];
 const LV=['Tadpole','Froglet','Pond hopper','Lily leaper','Marsh master','Bullfrog','Pond king'];
 function lvl(){const xp=S.xp||0,n=Math.floor(Math.sqrt(xp/50))+1,cur=50*(n-1)**2,next=50*n**2;return{n,title:LV[Math.min(n-1,LV.length-1)],xp,pct:Math.round((xp-cur)/(next-cur)*100),toNext:next-xp}}
-function addXP(n){const b=lvl().n;S.xp=Math.max(0,(S.xp||0)+n);const a=lvl().n;if(a>b)setTimeout(()=>{confetti(160);haptic([40,60,100]);toast('Level '+a+': '+lvl().title)},600)}
+function addXP(n){const b=lvl().n;S.xp=Math.max(0,(S.xp||0)+n);const a=lvl().n;if(a>b)setTimeout(()=>{sfx('level');confetti(160);haptic([40,60,100]);toast('Level '+a+': '+lvl().title)},600)}
 function bestStreak(){const set=new Set();S.goals.forEach(g=>g.habitLog.forEach(d=>set.add(d)));let best=0;[...set].forEach(d=>{if(set.has(addDays(d,1)))return;let n=1,p=d;while(set.has(addDays(p,-1))){n++;p=addDays(p,-1)}best=Math.max(best,n)});return best}
 function act(d){let n=0;S.goals.forEach(g=>{if(g.habitLog.includes(d))n++;g.tasks.forEach(t=>{if(t.done&&t.doneAt===d)n++})});if((S.focus[d]||0)>0)n++;return n}
 function stats(){
   const frogs=Object.values(S.frogDone).filter(Boolean).length;let tasks=0;
   S.goals.forEach(g=>g.tasks.forEach(t=>{if(t.done)tasks++}));
-  return{frogs,tasks,focus:Object.values(S.focus).reduce((a,b)=>a+b,0),ach:S.goals.filter(g=>g.status==='done').length,rev:Object.values(S.reviewed).filter(Boolean).length,best:bestStreak(),maxTasks:Math.max(0,...S.goals.map(g=>g.tasks.length))};
+  return{frogs,tasks,focus:Object.values(S.focus).reduce((a,b)=>a+b,0),ach:S.goals.filter(g=>g.status==='done').length,rev:Object.values(S.reviewed).filter(Boolean).length,best:bestStreak(),maxTasks:Math.max(0,...S.goals.map(g=>g.tasks.length)),weeks:Object.keys(S.weekly||{}).length};
 }
 const BADGES=[
  ['frog1','First frog','Eat your first frog',s=>s.frogs>=1,'leaf'],
@@ -375,11 +467,13 @@ const BADGES=[
  ['fo10','Deep worker','10 hours of focus',s=>s.focus>=600,'bolt'],
  ['plan','Planner','Plan a goal with 5 tasks',s=>s.maxTasks>=5,'route'],
  ['rev7','Daily reviewer','Review goals on 7 days',s=>s.rev>=7,'check'],
- ['ach1','Goal achieved','Achieve a goal',s=>s.ach>=1,'trophy']];
+ ['ach1','Goal achieved','Achieve a goal',s=>s.ach>=1,'trophy'],
+ ['wk1','Weekly ritual','Finish a weekly review',s=>s.weeks>=1,'cal'],
+ ['wk4','Four-week rhythm','Finish 4 weekly reviews',s=>s.weeks>=4,'cal']];
 function checkBadges(silent){
   const st=stats();
-  BADGES.forEach(b=>{if(b[3](st)&&!S.badges[b[0]]){S.badges[b[0]]=today();if(!silent)setTimeout(()=>{toast('Badge unlocked: '+b[1]);confetti(70);haptic([20,40,20])},1400)}});
-  save();
+  BADGES.forEach(b=>{if(b[3](st)&&!S.badges[b[0]]){S.badges[b[0]]=today();if(!silent)setTimeout(()=>{toast('Badge unlocked: '+b[1]);sfx('chime');confetti(70);haptic([20,40,20])},1400)}});
+  save(false);
 }
 function findTask(id){for(const g of S.goals){const t=g.tasks.find(x=>x.id===id);if(t)return{g,t}}return null}
 
@@ -398,9 +492,9 @@ function frogSVG(extra){
     <circle cx="48" cy="70" r="5" fill="var(--koi)" opacity=".35"/><circle cx="112" cy="70" r="5" fill="var(--koi)" opacity=".35"/>
   </g></svg>`;
 }
-function ring(p,size,sw,inner,fs){
+function ring(p,size,sw,inner,fs,color){
   const r=(size-sw)/2,c=+(2*Math.PI*r).toFixed(1),to=+(c*(1-Math.min(p,100)/100)).toFixed(1);
-  return `<div class="ringwrap" style="width:${size}px;height:${size}px;font-size:${fs||16}px"><svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+  return `<div class="ringwrap" style="width:${size}px;height:${size}px;font-size:${fs||16}px${color?`;--gc:${color}`:''}"><svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
   <circle class="tr" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${sw}"/>
   <circle class="arc" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${sw}" stroke-dasharray="${c}" stroke-dashoffset="${to}" style="--c:${c};--to:${to}"/></svg><b>${inner}</b></div>`;
 }
@@ -423,6 +517,11 @@ function sheet(title,fields,onSave,opts){
   const body=fields.map(f=>{
     const id='f_'+f.k;
     if(f.type==='checkbox')return `<label class="sw"><input type="checkbox" id="${id}" ${f.value?'checked':''}><span>${esc(f.label)}</span></label>${f.hint?`<div class="hint">${esc(f.hint)}</div>`:''}`;
+    if(f.type==='note')return `<div class="panel" style="margin-top:10px">${f.html}</div>`;
+    if(f.type==='pick'||f.type==='multi'){
+      const sel=x=>f.type==='multi'?(f.value||[]).includes(x):String(x)===String(f.value);
+      return `<label>${esc(f.label)}</label><div class="pick ${f.type==='multi'?'multi':''}" id="f_${f.k}" data-v="${f.type==='pick'?esc(f.value||''):''}">${f.opts.map(o=>`<button type="button" data-pk="${esc(o[0])}" class="${o[2]?'sw2 ':''}${sel(o[0])?'on':''}" ${o[2]?`style="background:${o[2]}" aria-label="color"`:''}>${o[1]}</button>`).join('')}</div>${f.hint?`<div class="hint">${esc(f.hint)}</div>`:''}`;
+    }
     let inp;
     if(f.type==='textarea')inp=`<textarea id="${id}" placeholder="${esc(f.ph||'')}">${esc(f.value||'')}</textarea>`;
     else if(f.type==='select')inp=`<select id="${id}">${f.opts.map(o=>`<option value="${esc(o[0])}" ${String(o[0])===String(f.value)?'selected':''}>${esc(o[1])}</option>`).join('')}</select>`;
@@ -440,12 +539,14 @@ function sheet(title,fields,onSave,opts){
   gr.addEventListener('touchend',()=>{if(dy>110)close();else{sh.style.transition='transform .25s var(--ease)';sh.style.transform='';}y0=null;dy=0});
   ov.addEventListener('click',e=>{
     if(e.target===ov){close();return}
+    const pk=e.target.closest('[data-pk]');
+    if(pk){const box=pk.parentElement;if(box.classList.contains('multi'))pk.classList.toggle('on');else{box.querySelectorAll('[data-pk]').forEach(x=>x.classList.remove('on'));pk.classList.add('on');box.dataset.v=pk.dataset.pk}haptic(6);return}
     const b=e.target.closest('[data-x]');if(!b)return;const a=b.dataset.x;
     if(a==='c')close();
     if(a==='d'&&confirm('Delete this permanently?')){opts.onDelete();close()}
     if(a==='s'){
       const v={};
-      for(const f of fields){const el=ov.querySelector('#f_'+f.k);v[f.k]=f.type==='checkbox'?el.checked:el.value.trim()}
+      for(const f of fields){if(f.type==='note')continue;const el=ov.querySelector('#f_'+f.k);v[f.k]=f.type==='checkbox'?el.checked:f.type==='pick'?(el.dataset.v||''):f.type==='multi'?[...el.querySelectorAll('.on')].map(x=>x.dataset.pk).join(','):el.value.trim()}
       if(opts.required&&!v[opts.required]){toast('Add a '+(opts.requiredName||opts.required)+' first');haptic(30);return}
       onSave(v);close();
     }
@@ -454,17 +555,22 @@ function sheet(title,fields,onSave,opts){
 
 /* ---------- forms ---------- */
 function goalForm(g){
-  const isNew=!g;g=g||{title:'',why:'',category:'Personal',priority:2,deadline:'',habit:'',top:false};
+  const isNew=!g;g=g||{title:'',why:'',category:'Personal',priority:2,deadline:'',habit:'',top:false,emoji:'',color:'',days:[]};
+  const days=(g.days&&g.days.length?g.days:[0,1,2,3,4,5,6]).map(String);
   sheet(isNew?'New goal':'Edit goal',[
     {k:'title',label:'Your goal, as if it is already true',type:'textarea',value:g.title,ph:'I weigh 70 kg by 31 Dec 2027',hint:'Present tense, positive, first person. Example: "I earn ₹X a year by this date."'},
     {k:'why',label:'Objective: what exactly do you want, and why?',type:'textarea',value:g.why,ph:'Be crystal clear about what done looks like.'},
+    {k:'emoji',label:'Emoji',type:'pick',value:g.emoji||gEmoji(g),opts:EMOJIS.map(e=>[e,e])},
+    {k:'color',label:'Color',type:'pick',value:g.color||COLORS[2],opts:COLORS.map(c=>[c,'',c])},
     {k:'category',label:'Category',type:'select',value:g.category,opts:CATS.map(c=>[c,c])},
     {k:'priority',label:'Priority',type:'select',value:g.priority,opts:[[1,'High'],[2,'Medium'],[3,'Low']]},
     {k:'deadline',label:'Deadline',type:'date',value:g.deadline,hint:'A goal without a deadline has no urgency.'},
-    {k:'habit',label:'Daily action',value:g.habit,ph:'Read 15 pages',hint:'One thing you will do every single day.'},
+    {k:'habit',label:'Daily action',value:g.habit,ph:'Read 15 pages',hint:'One thing you will do on your chosen days.'},
+    {k:'days',label:'Days for the daily action',type:'multi',value:days,opts:DAYN.map((d,i)=>[String(i),d]),hint:'Other days are rest days. They never break your streak.'},
     {k:'top',label:'This is my #1 goal',type:'checkbox',value:g.top,hint:'The goal with the greatest positive impact on your life. Its tasks become your daily frog first.'}
   ],v=>{
-    const set=Object.assign(g,{title:v.title,why:v.why,category:v.category,priority:+v.priority,deadline:v.deadline,habit:v.habit,top:v.top});
+    let dd=v.days?v.days.split(',').filter(Boolean).map(Number).sort():[];if(dd.length===7)dd=[];
+    const set=Object.assign(g,{title:v.title,why:v.why,emoji:v.emoji,color:v.color,category:v.category,priority:+v.priority,deadline:v.deadline,habit:v.habit,days:dd,top:v.top});
     if(v.top)S.goals.forEach(x=>{if(x!==set)x.top=false});
     if(isNew){Object.assign(set,{id:uid(),status:'active',habitLog:[],tasks:[],created:today()});S.goals.push(set);toast('Goal added')}
     save();render();
@@ -492,8 +598,8 @@ function toggleTask(gid,tid){
   const fr=currentFrog();const wasFrog=fr&&fr.t.id===tid;
   t.done=!t.done;justToggled=tid;
   if(t.done){
-    t.doneAt=today();haptic(20);addXP(10);
-    if(wasFrog&&!S.frogDone[today()]){S.frogDone[today()]=true;heroHop=true;addXP(25);confetti(150);haptic([30,40,60]);toast('Frog eaten. +35 XP')}
+    t.doneAt=today();haptic(20);addXP(10);sfx('tick');
+    if(wasFrog&&!S.frogDone[today()]){S.frogDone[today()]=true;heroHop=true;addXP(25);sfx('frog');confetti(150);haptic([30,40,60]);toast('Frog eaten. +35 XP')}
     else toast('Task done. +10 XP');
     if(g.tasks.every(x=>x.done)){setTimeout(()=>{if(confirm('Every task is done. Mark this goal as achieved?')){g.status='done';addXP(100);save();confetti(200);haptic([40,50,80]);checkBadges();render()}},900)}
   }else{t.doneAt=null;addXP(-10)}
@@ -501,10 +607,378 @@ function toggleTask(gid,tid){
 }
 function toggleHabit(gid){
   const g=goalById(gid),d=today(),i=g.habitLog.indexOf(d);justToggled='h'+gid;
-  if(i>=0){g.habitLog.splice(i,1);addXP(-5)}else{g.habitLog.push(d);haptic(25);addXP(5);const s=streak(g);toast(s>1?s+' days in a row. +5 XP':'Day one. +5 XP');if(s>0&&s%7===0)confetti(100)}
+  if(i>=0){g.habitLog.splice(i,1);addXP(-5)}else{g.habitLog.push(d);haptic(25);addXP(5);sfx('tick');const s=streak(g);toast(s>1?s+' days in a row. +5 XP':'Day one. +5 XP');if(s>0&&s%7===0){confetti(100);if(S.freezes<3){S.freezes++;setTimeout(()=>toast('You earned a streak freeze'),1800)}}}
   save();render();checkBadges();
 }
 function go(v,d){view=v;detail=d||null;render(true);scrollTo({top:0})}
+
+/* ---------- schedule, streaks, freezes ---------- */
+const EMOJIS=['🎯','💪','📚','🗣️','📸','❤️','💰','🧘','🏃','🎨','💼','🌱','✈️','🏠','🎸','🧠','🥗','😴','🚀','⭐'];
+const COLORS=['#ff7a63','#ffb547','#7bd88f','#7fc8ff','#c9a6ff','#ff9ecb','#5fd6c4','#d9d27a'];
+const CATEMOJI={Health:'💪',Learning:'📚',Skills:'🗣️',Career:'💼',Money:'💰',Relationships:'❤️',Personal:'🌱',Other:'🎯'};
+const DAYN=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function gEmoji(g){return g.emoji||CATEMOJI[g.category]||'🎯'}
+function gColor(g){return g.color||''}
+function sched(g,d){const a=g.days;return !a||!a.length||a.includes((new Date(d+'T00:00:00').getDay()+6)%7)}
+function daysLabel(g){const d=g.days||[];if(!d.length||d.length===7)return 'Every day';const j=d.join();if(j==='0,1,2,3,4')return 'Weekdays';if(j==='5,6')return 'Weekends';return d.map(i=>DAYN[i]).join(', ')}
+function streakGoal(g,end){
+  const log=new Set(g.habitLog),fz=new Set(g.frozen||[]);let d=end||today(),n=0,k=0;
+  if(!end&&!log.has(d))d=addDays(d,-1);
+  while(k++<800){if(!sched(g,d)){d=addDays(d,-1);continue}if(log.has(d))n++;else if(!fz.has(d))break;d=addDays(d,-1)}
+  return n;
+}
+function applyFreezes(){
+  const y=addDays(today(),-1);let changed=false;
+  S.goals.forEach(g=>{
+    if(g.status!=='active'||!g.habit)return;g.frozen=g.frozen||[];
+    if(!sched(g,y)||g.habitLog.includes(y)||g.frozen.includes(y)||(g.created&&g.created>=y))return;
+    const prev=streakGoal(g,addDays(y,-1));
+    if(prev>=3&&S.freezes>0){g.frozen.push(y);S.freezes--;changed=true;setTimeout(()=>toast('A streak freeze protected your '+prev+'-day streak'),1500)}
+  });
+  if(changed){save();render()}
+}
+
+/* ---------- sound ---------- */
+let ACx=null;
+function sfx(n){
+  if(!S.sound)return;
+  try{
+    ACx=ACx||new(window.AudioContext||window.webkitAudioContext)();if(ACx.state==='suspended')ACx.resume();
+    const P={tick:[[880,0,.07,'sine']],frog:[[196,0,.1,'square'],[262,.1,.1,'square'],[330,.2,.2,'triangle']],level:[[523,0,.1,'triangle'],[659,.1,.1,'triangle'],[784,.2,.1,'triangle'],[1047,.3,.3,'triangle']],chime:[[784,0,.12,'sine'],[988,.12,.12,'sine'],[1175,.24,.35,'sine']]}[n]||[];
+    const t0=ACx.currentTime;
+    P.forEach(a=>{const o=ACx.createOscillator(),g=ACx.createGain();o.type=a[3];o.frequency.value=a[0];
+      g.gain.setValueAtTime(0,t0+a[1]);g.gain.linearRampToValueAtTime(.09,t0+a[1]+.01);g.gain.exponentialRampToValueAtTime(.0001,t0+a[1]+a[2]+.08);
+      o.connect(g);g.connect(ACx.destination);o.start(t0+a[1]);o.stop(t0+a[1]+a[2]+.1)});
+  }catch(e){}
+}
+
+/* ---------- templates ---------- */
+const TEMPLATES=[
+ {id:'fit',emoji:'💪',color:'#ff7a63',title:'I am fit, strong and full of energy.',why:'A strong body gives me energy and confidence for everything else.',category:'Health',habit:'Work out for 30 minutes',days:[0,1,2,3,4,5],tasks:[['Choose a gym or home routine',3],['Plan a 4-day workout split',5,0],['Buy shoes and a water bottle',7],['Track meals for one week',14,1],['Hit the week-four workout target',28,3]]},
+ {id:'read',emoji:'📚',color:'#7fc8ff',title:'I read books regularly and finish one every month.',why:'Reading builds knowledge, focus and better decisions.',category:'Learning',habit:'Read 15 pages',days:[],tasks:[['Pick the next three books',3],['Set a fixed daily reading time',5],['Finish book one',30,0],['Write a short summary of book one',33,2]]},
+ {id:'eng',emoji:'🗣️',color:'#c9a6ff',title:'I speak English fluently and confidently.',why:'Fluent English opens doors in work and in life.',category:'Skills',habit:'Speak English for 20 minutes',days:[],tasks:[['Find a speaking partner or tutor',5],['Record a one-minute voice note every day',7],['Learn 10 new words every week',14],['Hold a 15-minute conversation without switching language',45,0]]},
+ {id:'insta',emoji:'📸',color:'#ff9ecb',title:'I run a popular Instagram account with strong reach.',why:'A real audience gives me influence and opportunities.',category:'Career',habit:'Create or post one piece of content',days:[0,1,2,3,4,5],tasks:[['Choose a niche and a clear promise',3],['Set up and polish the profile',5,0],['Plan 30 days of content',10,1],['Post every day for 30 days',40,2],['Review analytics and double down on what works',45,3]]},
+ {id:'money',emoji:'💰',color:'#ffb547',title:'I save and invest every month and my net worth grows.',why:'Money gives me choices and peace of mind.',category:'Money',habit:"Log today's spending",days:[],tasks:[['List all income and expenses',3],['Set a monthly savings target',5,0],['Automate a monthly transfer to savings',10,1],['Build one month of emergency savings',60,2]]},
+ {id:'career',emoji:'💼',color:'#5fd6c4',title:'I grow in my career and earn a promotion or raise.',why:'Growth at work shapes my income and my confidence.',category:'Career',habit:'One hour of deep work on my top skill',days:[0,1,2,3,4],tasks:[['Write down what the next level requires',4],['Discuss goals and expectations with my manager',7,0],['Finish one visible project',45,1],['Ask for feedback and review progress',60,2]]},
+ {id:'love',emoji:'❤️',color:'#ff7a63',title:'I have found a loving, compatible life partner.',why:'A shared life with the right person.',category:'Relationships',habit:'Do one thing that moves this forward',days:[],tasks:[['Write down the values and qualities that matter most',3],['Update my profile and photos',7,0],['Say yes to one new social event each week',14],['Go on three first dates',60,1]]},
+ {id:'calm',emoji:'🧘',color:'#7bd88f',title:'I am calm, focused and in control of my mind.',why:'A steady mind improves everything I do.',category:'Personal',habit:'Meditate for 10 minutes',days:[],tasks:[['Choose a quiet time and place',2],['Try a guided meditation for 7 days',9,0],['Reach a 21-day streak',30,1]]}
+];
+function createFromTemplate(t){
+  const T=today(),end=(new Date().getFullYear()+1)+'-12-31';
+  const g={id:uid(),title:t.title,why:t.why,category:t.category,priority:2,deadline:end,status:'active',top:false,habit:t.habit,habitLog:[],tasks:[],created:T,emoji:t.emoji,color:t.color,days:t.days||[]};
+  t.tasks.forEach((x,i)=>g.tasks.push({id:uid(),title:x[0],priority:i===0?1:2,deadline:addDays(T,x[1]),after:null,done:false}));
+  t.tasks.forEach((x,i)=>{if(x[2]!=null)g.tasks[i].after=g.tasks[x[2]].id});
+  S.goals.push(g);save();confetti(70);sfx('chime');toast('Goal and plan added');
+  detail=g.id;view='goals';render(true);scrollTo({top:0});
+}
+function templateSheet(){
+  const ov=document.createElement('div');ov.className='overlay';
+  ov.innerHTML=`<div class="sheet"><div class="grab"></div><h2>Start from a template</h2><div class="mute">You get a goal, a daily action and an ordered plan. Edit anything afterwards.</div><div class="menu">${TEMPLATES.map(t=>`<button class="tpl" data-tp="${t.id}"><span class="emo">${t.emoji}</span><span>${esc(t.title)}<small>${t.tasks.length} tasks. Daily: ${esc(t.habit)}</small></span></button>`).join('')}</div></div>`;
+  document.body.appendChild(ov);
+  const close=()=>{ov.classList.add('out');setTimeout(()=>ov.remove(),230)};
+  ov.addEventListener('click',e=>{if(e.target===ov){close();return}const b=e.target.closest('[data-tp]');if(!b)return;const t=TEMPLATES.find(x=>x.id===b.dataset.tp);close();haptic(12);createFromTemplate(t)});
+}
+
+/* ---------- weekly review ---------- */
+function weekStart(d){d=d||today();const dow=(new Date(d+'T00:00:00').getDay()+6)%7;return addDays(d,-dow)}
+function weeklyReview(){
+  const T=today(),ws=weekStart(T);let habits=0,tasks=0,focus=0,frogs=0,active=0;
+  for(let i=0;i<7;i++){const d=addDays(ws,i);if(d>T)break;S.goals.forEach(g=>{if(g.habitLog.includes(d))habits++;g.tasks.forEach(t=>{if(t.done&&t.doneAt===d)tasks++})});focus+=S.focus[d]||0;if(S.frogDone[d])frogs++;if(act(d))active++}
+  const prev=S.weekly[ws]||{};
+  const winsText=prev.win||Object.entries(S.wins).filter(w=>w[0]>=ws&&w[1]).map(w=>w[1]).join(' ');
+  const nt=nextTasks(),ag=S.goals.filter(g=>g.status==='active');
+  sheet('Weekly review',[
+    {k:'n',type:'note',html:`<b>This week</b><div class="mute" style="margin-top:4px">${habits} daily actions, ${tasks} tasks, ${frogs} frogs eaten, ${focus} focus minutes. Active on ${active} of 7 days.</div>`},
+    {k:'win',label:'Your biggest win this week',type:'textarea',value:winsText,ph:'What are you proud of?'},
+    {k:'slipped',label:'What slipped, and why?',type:'textarea',value:prev.slipped||'',ph:'Be honest. Facts, not blame.'},
+    {k:'goal',label:'Your one focus goal next week',type:'select',value:prev.goal||((ag.find(g=>g.top)||ag[0]||{}).id||''),opts:[['','None']].concat(ag.map(g=>[g.id,g.title.length>50?g.title.slice(0,50)+'…':g.title]))},
+    {k:'frog',label:"Monday's frog",type:'select',value:prev.frog||'',opts:[['','Decide on Monday']].concat(nt.map(x=>[x.t.id,x.t.title]))}
+  ],v=>{
+    const first=!S.weekly[ws];
+    S.weekly[ws]={win:v.win,slipped:v.slipped,goal:v.goal,frog:v.frog,at:Date.now()};
+    if(v.frog)S.frogs[addDays(ws,7)]=v.frog;
+    if(v.goal)S.goals.forEach(g=>{g.top=g.id===v.goal});
+    if(first){addXP(25);toast('Weekly review done. +25 XP');confetti(80);sfx('chime')}else toast('Review updated');
+    save();render();checkBadges();
+  });
+}
+
+/* ---------- share card ---------- */
+const FROG_STATIC='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 124"><ellipse cx="80" cy="106" rx="66" ry="13" fill="#245a43"/><ellipse cx="46" cy="98" rx="15" ry="7" fill="#7bd88f"/><ellipse cx="114" cy="98" rx="15" ry="7" fill="#7bd88f"/><ellipse cx="80" cy="74" rx="42" ry="30" fill="#7bd88f"/><ellipse cx="80" cy="86" rx="25" ry="16" fill="#c9f2cf" opacity=".85"/><circle cx="56" cy="44" r="16" fill="#7bd88f"/><circle cx="104" cy="44" r="16" fill="#7bd88f"/><circle cx="56" cy="44" r="10.5" fill="#fff"/><circle cx="104" cy="44" r="10.5" fill="#fff"/><circle cx="58" cy="45" r="5.5" fill="#0a1a17"/><circle cx="102" cy="45" r="5.5" fill="#0a1a17"/><path d="M60 72q20 16 40 0" fill="none" stroke="#0a1a17" stroke-width="3.2" stroke-linecap="round"/><circle cx="48" cy="70" r="5" fill="#ff7a63" opacity=".35"/><circle cx="112" cy="70" r="5" fill="#ff7a63" opacity=".35"/></svg>';
+const svgImg=svg=>new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)});
+async function drawCard(){
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  try{await document.fonts.load('700 48px Bricolage')}catch(e){}
+  const L=lvl(),st=stats(),T=today(),F='Bricolage, system-ui, sans-serif',acc=(ACC[S.accent]||ACC.lily)[0];
+  const bg=x.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#10302a');bg.addColorStop(1,'#07110f');x.fillStyle=bg;x.fillRect(0,0,W,H);
+  x.fillStyle='rgba(184,230,185,.06)';[[930,170,340],[110,1190,300]].forEach(a=>{x.beginPath();x.arc(a[0],a[1],a[2],0,7);x.fill()});
+  x.textAlign='left';x.fillStyle='#8fb0a2';x.font=`600 34px ${F}`;x.fillText('Eat That Frog',80,110);
+  const img=await svgImg(FROG_STATIC);if(img)x.drawImage(img,W/2-260,170,520,403);
+  x.textAlign='center';x.fillStyle='#e8f3ea';x.font=`760 78px ${F}`;x.fillText(L.title,W/2,690);
+  x.fillStyle='#8fb0a2';x.font=`500 36px ${F}`;x.fillText(`Level ${L.n}  ·  ${L.xp} XP`,W/2,745);
+  x.fillStyle='rgba(255,255,255,.1)';x.beginPath();x.roundRect(240,780,600,18,9);x.fill();
+  x.fillStyle=acc;x.beginPath();x.roundRect(240,780,Math.max(18,600*L.pct/100),18,9);x.fill();
+  const tiles=[[st.frogs,'frogs eaten'],[overallStreak(),'day streak'],[st.tasks,'tasks done'],[Math.floor(st.focus/60)+'h','focus time']];
+  tiles.forEach((t,i)=>{const cx=190+i*233;x.fillStyle=i===1?'#ffb547':'#e8f3ea';x.font=`760 76px ${F}`;x.fillText(String(t[0]),cx,930);x.fillStyle='#8fb0a2';x.font=`500 28px ${F}`;x.fillText(t[1],cx,975)});
+  const dow=(new Date().getDay()+6)%7,cells=13*7+dow+1,start=addDays(T,-(cells-1)),cs=40,gap=8,left=(W-(14*(cs+gap)-gap))/2,top=1040;
+  for(let i=0;i<cells;i++){const d=addDays(start,i),n=act(d),col=Math.floor(i/7),row=i%7;
+    x.fillStyle=n===0?'rgba(255,255,255,.08)':acc;x.globalAlpha=n===0?1:n===1?.35:n===2?.6:n<5?.82:1;
+    x.beginPath();x.roundRect(left+col*(cs+gap),top+row*(cs+gap),cs,cs,8);x.fill();x.globalAlpha=1}
+  x.fillStyle='#8fb0a2';x.font=`500 30px ${F}`;x.fillText('Last 14 weeks',W/2,1370-60);
+  return c;
+}
+async function shareCard(){
+  toast('Making your card');
+  let c;try{c=await drawCard()}catch(e){toast('Could not make the card');return}
+  const url=c.toDataURL('image/png');
+  const ov=document.createElement('div');ov.className='overlay';
+  ov.innerHTML=`<div class="sheet"><div class="grab"></div><h2>Your progress card</h2><img class="card-prev" src="${url}" alt="Progress card"><div class="row" style="justify-content:center;flex-wrap:wrap"><button class="btn rip" data-c="share">${ic('share',18)}Share</button><button class="btn soft rip" data-c="save">Save image</button><button class="btn ghost" data-c="close">Close</button></div></div>`;
+  document.body.appendChild(ov);
+  const close=()=>{ov.classList.add('out');setTimeout(()=>ov.remove(),230)};
+  const getBlob=()=>new Promise(r=>c.toBlob(r,'image/png'));
+  ov.addEventListener('click',async e=>{
+    if(e.target===ov){close();return}
+    const b=e.target.closest('[data-c]');if(!b)return;const a=b.dataset.c;
+    if(a==='close')close();
+    else if(a==='save'){const l=document.createElement('a');l.href=url;l.download='eat-that-frog-'+today()+'.png';l.click();toast('Saved to downloads')}
+    else if(a==='share'){
+      try{
+        const blob=await getBlob(),file=new File([blob],'eat-that-frog.png',{type:'image/png'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:'My progress on Eat That Frog'});return}
+        const P=window.Capacitor&&Capacitor.Plugins;
+        if(P&&P.Filesystem&&P.Share){const b64=url.split(',')[1];const w=await P.Filesystem.writeFile({path:'eat-that-frog.png',data:b64,directory:'CACHE'});await P.Share.share({title:'My progress',text:'My progress on Eat That Frog',files:[w.uri]});return}
+        const l=document.createElement('a');l.href=url;l.download='eat-that-frog.png';l.click();toast('Saved to downloads');
+      }catch(err){}
+    }
+  });
+}
+
+/* ---------- Google sign-in and cloud backup ---------- */
+const FA=()=>window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseAuthentication;
+const CLOUD_ID=()=>window.CLOUD&&window.CLOUD.projectId;
+let me=null,syncing=false,syncState='',syncT=null;
+const setMe=u=>{me={uid:u.uid,name:u.displayName||'',email:u.email||'',photo:u.photoUrl||'',phone:u.phoneNumber||''}};
+const docUrl=()=>`https://firestore.googleapis.com/v1/projects/${CLOUD_ID()}/databases/(default)/documents/users/${me.uid}`;
+async function authHeaders(){const r=await FA().getIdToken({forceRefresh:false});return{Authorization:'Bearer '+r.token,'Content-Type':'application/json'}}
+async function cloudGet(){
+  const r=await fetch(docUrl(),{headers:await authHeaders()});
+  if(r.status===404)return null;
+  if(!r.ok)throw new Error('get '+r.status);
+  const j=await r.json(),f=j.fields||{};
+  return{data:f.data&&f.data.stringValue,updatedAt:+((f.updatedAt&&f.updatedAt.integerValue)||0)};
+}
+async function cloudPut(){
+  const body={fields:{data:{stringValue:JSON.stringify(S)},updatedAt:{integerValue:String(S.updatedAt||0)}}};
+  const r=await fetch(docUrl()+'?updateMask.fieldPaths=data&updateMask.fieldPaths=updatedAt',{method:'PATCH',headers:await authHeaders(),body:JSON.stringify(body)});
+  if(!r.ok)throw new Error('put '+r.status);
+}
+function markSynced(ts){localStorage.setItem('etf-sync-stamp',String(ts==null?(S.updatedAt||0):ts));localStorage.setItem('etf-last-sync',String(Date.now()));setSync('ok')}
+function setSync(st){syncState=st;const el=document.getElementById('syncLbl');if(el)el.textContent=syncLabel()}
+function syncLabel(){
+  if(syncState==='syncing')return 'Syncing...';
+  if(syncState==='error')return 'Could not sync. It will retry when you are online.';
+  const t=+localStorage.getItem('etf-last-sync')||0;if(!t)return 'Not synced yet';
+  const m=Math.round((Date.now()-t)/60000);return 'Synced '+(m<1?'just now':m<60?m+' min ago':Math.round(m/60)+' h ago');
+}
+function adopt(json,stamp){
+  const d=JSON.parse(json);S=Object.assign({},d);ensure();S.updatedAt=stamp;
+  try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}
+  markSynced(stamp);applyTheme();render(true);
+}
+async function syncNow(verbose){
+  if(!me||syncing)return;
+  if(!navigator.onLine){if(verbose)toast('You are offline');return}
+  syncing=true;setSync('syncing');
+  try{
+    const c=await cloudGet(),stamp=+localStorage.getItem('etf-sync-stamp')||0,local=S.updatedAt||0,dirty=local>stamp;
+    if(!c||!c.data){await cloudPut();markSynced();if(verbose)toast('Backed up to the cloud')}
+    else if(c.updatedAt>local){
+      if(!dirty||!local){adopt(c.data,c.updatedAt);if(verbose)toast('Restored from the cloud')}
+      else if(confirm('Your cloud backup has newer data than this phone.\nOK = use the cloud copy.\nCancel = keep this phone and replace the cloud copy.')){adopt(c.data,c.updatedAt)}
+      else{await cloudPut();markSynced()}
+    }
+    else if(local>c.updatedAt){await cloudPut();markSynced();if(verbose)toast('Backed up to the cloud')}
+    else{markSynced();if(verbose)toast('Already up to date')}
+  }catch(e){setSync('error');if(verbose)toast(String(e.message||e).includes('403')?'Cloud permission denied. Check the Firestore rules.':'Could not sync')}
+  finally{syncing=false}
+}
+function queueSync(){if(!me)return;clearTimeout(syncT);syncT=setTimeout(()=>syncNow(false),2500)}
+const COUNTRIES=[['+91','IN +91'],['+1','US +1'],['+44','UK +44'],['+61','AU +61'],['+971','AE +971'],['+65','SG +65'],['+966','SA +966'],['+92','PK +92'],['+880','BD +880'],['+94','LK +94'],['+977','NP +977'],['+60','MY +60'],['+62','ID +62'],['+63','PH +63'],['+49','DE +49'],['+33','FR +33'],['+81','JP +81'],['+27','ZA +27'],['+234','NG +234'],['+55','BR +55']];
+const cloudReady=()=>!!(FA()&&CLOUD_ID());
+function signIn(){showLogin()}
+function authError(e){
+  const m=String((e&&(e.message||e.code))||e||'').toLowerCase();
+  if(m.includes('cancel')||m.includes('12501')||m.includes('canceled'))return 'cancel';
+  if(m.includes('invalid')&&m.includes('code')||m.includes('invalid-verification'))return 'That code is not right. Check it and try again.';
+  if(m.includes('expired'))return 'That code has expired. Ask for a new one.';
+  if(m.includes('too-many')||m.includes('too many')||m.includes('blocked')||m.includes('quota'))return 'Too many attempts. Please wait a while and try again.';
+  if(m.includes('network')||m.includes('timeout'))return 'No connection. Check your internet and try again.';
+  if(m.includes('phone')&&m.includes('invalid'))return 'That phone number does not look right.';
+  if(m.includes('17999')||m.includes('internal')||m.includes('app-not-authorized')||m.includes('play integrity')||m.includes('recaptcha'))return 'Phone sign-in is not ready for this build. Use Google for now.';
+  return 'Something went wrong. Please try again.';
+}
+function showLogin(){
+  if(document.querySelector('.login'))return;
+  try{localStorage.setItem('etf-login-seen','1')}catch(e){}
+  const fa=FA(),ov=document.createElement('div');ov.className='login';document.body.appendChild(ov);
+  let step='home',cc='+91',num='',vid='',busy=false,err='',left=0,tm=null,hs=[],code='';
+  const clean=async()=>{for(const x of hs){try{await x.remove()}catch(e){}}hs=[]};
+  const close=()=>{clearInterval(tm);clean();ov.style.animation='fadeout .3s both';setTimeout(()=>ov.remove(),300);render(true)};
+  const done=async user=>{
+    try{if(localStorage.getItem('etf-uid')!==user.uid){localStorage.setItem('etf-sync-stamp','0');localStorage.setItem('etf-uid',user.uid)}}catch(e){}
+    setMe(user);haptic([20,40,20]);sfx('chime');close();toast('Welcome'+(me.name?', '+me.name.split(' ')[0]:''));await syncNow(true);
+  };
+  const e164=()=>cc+num.replace(/\D/g,'').replace(/^0+/,'');
+  const valid=()=>{const d=num.replace(/\D/g,'').replace(/^0+/,'');return d.length>=6&&d.length<=13};
+  const tick=()=>{clearInterval(tm);left=30;tm=setInterval(()=>{left--;const b=ov.querySelector('[data-l=resend]');if(b){b.disabled=left>0;b.textContent=left>0?'Resend code in '+left+'s':'Resend code'}if(left<=0)clearInterval(tm)},1000)};
+  async function google(){
+    if(!cloudReady()){toast(fa?'Cloud is not set up in this build yet':'Sign-in works in the installed app');return}
+    busy=true;draw();
+    try{const r=await fa.signInWithGoogle();await done(r.user)}
+    catch(e){busy=false;const m=authError(e);err=m==='cancel'?'':m;draw();if(m==='cancel')toast('Sign-in cancelled')}
+  }
+  async function send(resend){
+    if(!cloudReady()){err=fa?'Cloud is not set up in this build yet.':'Phone sign-in works in the installed app.';draw();return}
+    if(!valid()){err='Enter a valid mobile number.';draw();return}
+    busy=true;err='';draw();await clean();
+    try{
+      hs.push(await fa.addListener('phoneCodeSent',e=>{vid=e.verificationId;busy=false;step='otp';code='';err='';tick();draw();haptic(15)}));
+      hs.push(await fa.addListener('phoneVerificationCompleted',e=>{if(e&&e.user)done(e.user)}));
+      hs.push(await fa.addListener('phoneVerificationFailed',e=>{busy=false;err=authError(e);draw()}));
+      await fa.signInWithPhoneNumber({phoneNumber:e164(),resendCode:!!resend});
+    }catch(e){busy=false;err=authError(e);draw()}
+  }
+  async function verify(){
+    if(code.length!==6||busy)return;
+    busy=true;draw();
+    try{const r=await fa.confirmVerificationCode({verificationId:vid,verificationCode:code});await done(r.user)}
+    catch(e){busy=false;err=authError(e);code='';draw();const o=ov.querySelector('.otp');if(o){o.classList.add('bad');haptic(60)}}
+  }
+  function draw(){
+    const spin='<span class="spin"></span>';
+    if(step==='home'){
+      ov.innerHTML=`<button class="x" data-l="skip" aria-label="Close">&times;</button>
+      <div class="hero2"><div class="orb"><i class="rp"></i><i class="rp"></i>${frogSVG()}</div>
+        <h1>Never lose your <em>goals</em></h1>
+        <p>Sign in so your progress is backed up and follows you to any phone.</p></div>
+      <div class="bar2">
+        <button class="btn g rip" data-l="google" ${busy?'disabled':''}>${busy?spin:'<span class="gbtn">G</span>'}Continue with Google</button>
+        <button class="btn soft rip" data-l="phone" ${busy?'disabled':''}>${ic('phone',20)}Continue with mobile number</button>
+        <button class="btn ghost" data-l="skip">Maybe later</button>
+        ${err?`<div class="err" style="text-align:center">${esc(err)}</div>`:''}
+      </div>
+      <div class="fine">${ic('shield',14)} Your data is sent over encrypted connections and only your account can read it. We never post or share anything.</div>`;
+    }else if(step==='phone'){
+      ov.innerHTML=`<button class="back" data-l="back" aria-label="Back">${ic('back',20)}</button>
+      <div class="form"><div class="t"><h2>Your mobile number</h2><p>We will text you a 6-digit code to confirm it is you.</p></div>
+        <div class="phone"><select id="cc" aria-label="Country code">${COUNTRIES.map(c=>`<option value="${c[0]}" ${c[0]===cc?'selected':''}>${c[1]}</option>`).join('')}</select>
+        <input id="pn" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="15" value="${esc(num)}"></div>
+        <div class="err" id="err">${esc(err)}</div>
+        <button class="btn rip" data-l="send" style="justify-content:center;padding:15px" ${busy?'disabled':''}>${busy?spin+' Sending':'Send code'}</button>
+        <div class="fine" style="margin:0">Standard SMS rates may apply.</div></div>`;
+      const pn=ov.querySelector('#pn');setTimeout(()=>pn&&pn.focus(),350);
+    }else{
+      ov.innerHTML=`<button class="back" data-l="back" aria-label="Back">${ic('back',20)}</button>
+      <div class="form"><div class="t"><h2>Enter the code</h2><p>Sent to <b style="color:var(--ink)">${esc(e164())}</b></p></div>
+        <div class="otp" id="otp"><input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="${code}" aria-label="6-digit code">${[0,1,2,3,4,5].map(k=>`<i class="${code.length===k?'on':''}">${code[k]||''}</i>`).join('')}</div>
+        <div class="err" id="err">${esc(err)}</div>
+        <button class="btn rip" data-l="verify" style="justify-content:center;padding:15px" ${code.length!==6||busy?'disabled':''}>${busy?spin+' Verifying':'Verify and continue'}</button>
+        <div style="text-align:center"><button class="resend" data-l="resend" ${left>0?'disabled':''}>${left>0?'Resend code in '+left+'s':'Resend code'}</button></div></div>`;
+      const c=ov.querySelector('#code');setTimeout(()=>c&&c.focus(),350);
+    }
+  }
+  ov.addEventListener('input',e=>{
+    if(e.target.id==='pn'){num=e.target.value.replace(/[^\d ]/g,'');err='';const er=ov.querySelector('#err');if(er)er.textContent=''}
+    else if(e.target.id==='code'){
+      code=e.target.value.replace(/\D/g,'').slice(0,6);e.target.value=code;
+      ov.querySelectorAll('.otp i').forEach((x,k)=>{x.textContent=code[k]||'';x.classList.toggle('on',code.length===k)});
+      const b=ov.querySelector('[data-l=verify]');if(b)b.disabled=code.length!==6;
+      if(code.length===6)verify();
+    }
+  });
+  ov.addEventListener('change',e=>{if(e.target.id==='cc')cc=e.target.value});
+  ov.addEventListener('keydown',e=>{if(e.key==='Enter'){if(step==='phone')send(false);else if(step==='otp')verify()}});
+  ov.addEventListener('click',e=>{
+    const b=e.target.closest('[data-l]');if(!b)return;const a=b.dataset.l;haptic(8);
+    if(a==='skip')close();
+    else if(a==='google')google();
+    else if(a==='phone'){step='phone';err='';draw()}
+    else if(a==='back'){clearInterval(tm);step=step==='otp'?'phone':'home';err='';busy=false;draw()}
+    else if(a==='send')send(false);
+    else if(a==='verify')verify();
+    else if(a==='resend'){if(left<=0){tick();send(true)}}
+  });
+  draw();
+}
+async function signOutNow(){
+  if(!confirm('Sign out? Your goals stay on this phone.'))return;
+  try{await FA().signOut()}catch(e){}
+  me=null;render();
+}
+function initCloud(){
+  const fa=FA();if(!fa)return;
+  fa.getCurrentUser().then(r=>{if(r&&r.user){setMe(r.user);render();syncNow(false)}else if(S.toured&&cloudReady()&&!localStorage.getItem('etf-login-seen'))setTimeout(()=>{if(!locked&&!document.querySelector('.tour'))showLogin()},2600)}).catch(()=>{});
+  addEventListener('online',()=>syncNow(false));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){applyFreezes();syncNow(false)}});
+}
+function accountPanel(){
+  if(me){
+    const av=me.photo?`<img class="avatar" src="${esc(me.photo)}" referrerpolicy="no-referrer" alt="">`:`<div class="avatar">${me.name||me.email?esc((me.name||me.email)[0].toUpperCase()):ic('phone',22)}</div>`;
+    return `<div class="panel" style="margin-top:4px"><div class="row">${av}<div class="sp"><div style="font-weight:700">${esc(me.name||'Signed in')}</div><div class="mute">${esc(me.email||me.phone)}</div></div></div><div class="mute" id="syncLbl" style="margin:12px 0">${syncLabel()}</div><div class="row"><button class="btn rip sm" data-act="syncnow">${ic('bolt',16)}Sync now</button><button class="btn soft sm rip" data-act="signout">Sign out</button></div><div style="margin-top:12px"><button class="btn ghost" style="padding:6px 0;font-size:13.5px;color:var(--mute)" data-act="delacct">Delete my account and cloud data</button></div></div>`;
+  }
+  const ready=cloudReady();
+  return `<div class="panel" style="margin-top:4px"><div style="font-weight:700;font-size:17px">Back up your goals</div><div class="mute" style="margin:6px 0 12px">${ready?'Sign in with Google or your mobile number. Your goals save to the cloud and come back on any phone.':(FA()?'Cloud backup is not set up in this build yet.':'Sign-in works in the installed Android app.')}</div><button class="btn rip" data-act="signin">${ic('shield',18)}Sign in</button></div>`;
+}
+async function deleteAccount(){
+  if(!me)return;
+  if(!confirm('Delete your account and the cloud copy of your goals? Goals on this phone stay.'))return;
+  if(!confirm('This cannot be undone. Delete now?'))return;
+  try{
+    const r=await fetch(docUrl(),{method:'DELETE',headers:await authHeaders()});
+    if(!r.ok&&r.status!==404)throw new Error('del '+r.status);
+    await FA().deleteUser();
+  }catch(e){toast(String(e.message||e).toLowerCase().includes('recent')?'For safety, sign out, sign in again, then retry':'Could not delete. Try again online.');return}
+  try{await FA().signOut()}catch(e){}
+  me=null;localStorage.removeItem('etf-sync-stamp');localStorage.removeItem('etf-last-sync');localStorage.removeItem('etf-uid');toast('Account deleted');render();
+}
+
+/* ---------- intro tour ---------- */
+function maybeTour(){
+  if(S.toured)return;
+  const pristine=!S.xp&&S.goals.every(g=>!g.habitLog.length&&!g.tasks.length);
+  if(!pristine){S.toured=true;save(false);return}
+  setTimeout(()=>showTour(false),2300);
+}
+function showTour(replay){
+  if(document.querySelector('.tour'))return;
+  const slides=[
+    {art:frogSVG(),h:'Do the hardest thing first',p:'Every day one task is your frog. Eat it first and the rest of the day feels light.'},
+    {art:ic('target'),h:'Write goals as if they are done',p:'Present tense, with a deadline. A written goal has energy. A goal in your head is just a wish.'},
+    {art:ic('route'),h:'Plan it, then act daily',p:'List the steps in order and pick one daily action. Streaks, levels and focus sessions keep you moving.'},
+    {art:ic('bolt'),h:'Your progress, kept safe',p:'Sign in with Google or your mobile number and your goals back up to the cloud, ready on any phone.',last:true}
+  ];
+  let i=0;const ov=document.createElement('div');ov.className='tour';document.body.appendChild(ov);
+  const finish=(nl)=>{S.toured=true;save(false);ov.style.animation='fadeout .3s both';setTimeout(()=>ov.remove(),300);render(true);if(nl!==true&&!replay&&cloudReady()&&!me&&!localStorage.getItem('etf-login-seen'))setTimeout(showLogin,450)};
+  const draw=()=>{
+    const s=slides[i];
+    ov.innerHTML=`<div style="text-align:right;min-height:44px">${s.last?'':`<button class="btn ghost" data-t="skip">Skip</button>`}</div>
+    <div class="sl"><div class="art">${s.art}</div><h2>${s.h}</h2><p>${s.p}</p></div>
+    <div class="dots">${slides.map((_,k)=>`<i class="${k===i?'on':''}"></i>`).join('')}</div>
+    <div class="bar2">${s.last?`${cloudReady()&&!me?`<button class="btn rip" data-t="signin">${ic('shield',18)}Sign in and back up</button>`:''}<button class="btn soft rip" data-t="tpl">Start from a template</button><button class="btn ghost" data-t="done">${replay?'Close':'Keep my starter goals'}</button>`:`<button class="btn rip" data-t="next">Next</button>`}</div>`;
+  };
+  ov.addEventListener('click',e=>{
+    const b=e.target.closest('[data-t]');if(!b)return;const a=b.dataset.t;haptic(8);
+    if(a==='next'){i++;draw()}
+    else if(a==='skip'||a==='done')finish();
+    else if(a==='tpl'){finish(true);setTimeout(templateSheet,350)}
+    else if(a==='signin'){finish(true);setTimeout(showLogin,380)}
+  });
+  let x0=null;
+  ov.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  ov.addEventListener('touchend',e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(dx<-60&&i<slides.length-1){i++;draw()}else if(dx>60&&i>0){i--;draw()}});
+  draw();
+}
+
 
 /* ---------- quick actions ---------- */
 function quickTask(){
@@ -522,21 +996,17 @@ function menuSheet(){
   ov.innerHTML=`<div class="sheet"><div class="grab"></div><h2>Add</h2><div class="menu">
    <button data-m="goal">${ic('target')}<span>New goal<small>Write it as if it is already true</small></span></button>
    <button data-m="task">${ic('plus')}<span>Quick task<small>Add a step to a goal's plan</small></span></button>
+   <button data-m="tmpl">${ic('leaf')}<span>Start from a template<small>A goal with a ready-made plan</small></span></button>
    <button data-m="focus">${ic('timer')}<span>Start a focus session<small>Work on one thing, no distractions</small></span></button></div></div>`;
   document.body.appendChild(ov);
   const close=()=>{ov.classList.add('out');setTimeout(()=>ov.remove(),230)};
   ov.addEventListener('click',e=>{
     if(e.target===ov){close();return}
     const b=e.target.closest('[data-m]');if(!b)return;const m=b.dataset.m;close();haptic(10);
-    setTimeout(()=>{if(m==='goal')goalForm();else if(m==='task')quickTask();else openFocus()},180);
+    setTimeout(()=>{if(m==='goal')goalForm();else if(m==='task')quickTask();else if(m==='tmpl')templateSheet();else openFocus()},180);
   });
 }
-function shareProgress(){
-  const L=lvl(),st=stats();
-  const txt=`I'm a ${L.title} (level ${L.n}) on Eat That Frog: ${st.frogs} frogs eaten, ${st.tasks} tasks done, ${overallStreak()}-day streak.`;
-  if(navigator.share)navigator.share({text:txt}).catch(()=>{});
-  else if(navigator.clipboard){navigator.clipboard.writeText(txt);toast('Copied to clipboard')}
-}
+function shareProgress(){shareCard()}
 async function scheduleReminders(ask){
   const LP=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications;
   if(!LP){if(ask&&S.remind.on){S.remind.on=false;save();render();toast('Reminders work in the installed app')}return false}
@@ -586,7 +1056,7 @@ function openFocus(gid,tid){
   const unlock=()=>{try{wl&&wl.release()}catch(e){}wl=null};
   const note=async on=>{if(!LP)return;try{await LP.cancel({notifications:[{id:20}]});if(on){const p=await LP.checkPermissions();if(p.display==='granted')await LP.schedule({notifications:[{id:20,title:'Focus session complete',body:'Great work. Take a short break.',schedule:{at:new Date(endAt),allowWhileIdle:true}}]})}}catch(e){}};
   const logMins=m=>{if(m<1)return;const T=today();S.focus[T]=(S.focus[T]||0)+m;const r=sel&&findTask(sel);if(r)S.focusGoal[r.g.id]=(S.focusGoal[r.g.id]||0)+m;addXP(m);save();checkBadges()};
-  const complete=()=>{clearInterval(timer);unlock();note(false);rem=0;done=mins;logMins(mins);phase='done';haptic([200,100,200,100,400]);confetti(110);body();draw();render()};
+  const complete=()=>{clearInterval(timer);unlock();note(false);rem=0;done=mins;logMins(mins);phase='done';sfx('chime');haptic([200,100,200,100,400]);confetti(110);body();draw();render()};
   const tick=()=>{if(phase!=='run')return;draw();if(endAt-Date.now()<=0)complete()};
   const start=()=>{phase='run';endAt=Date.now()+rem;clearInterval(timer);timer=setInterval(tick,250);lock();note(true);body();draw();haptic(15)};
   const pauseNow=()=>{rem=left();phase='pause';clearInterval(timer);unlock();note(false)};
@@ -616,14 +1086,14 @@ function openFocus(gid,tid){
 function goalRow(g){
   const p=prog(g);
   return `<div class="item rip ${g.top&&g.status==='active'?'topgoal':''}" data-act="open" data-id="${g.id}">
-    ${ring(p,52,5,g.status==='done'?ic('check',20):p+'%',13)}
-    <div class="sp"><div class="t">${g.top?`<span style="color:var(--sun)">${ic('star',15)}</span> `:''}${esc(g.title)}</div>
+    ${ring(p,52,5,g.status==='done'?ic('check',20):p+'%',13,gColor(g))}
+    <div class="sp"><div class="t">${gEmoji(g)} ${g.top?`<span style="color:var(--sun)">${ic('star',15)}</span> `:''}${esc(g.title)}</div>
     <div class="meta">${pri(g.priority)}<span>${esc(g.category)}</span>${due(g.deadline)}</div></div><span class="chev">${ic('chev')}</span></div>`;
 }
 function vToday(){
   const act=S.goals.filter(g=>g.status==='active'),fr=currentFrog(),T=today();
   const eaten=!!S.frogDone[T];
-  const hab=act.filter(g=>g.habit),hDone=hab.filter(g=>g.habitLog.includes(T)).length;
+  const hab=act.filter(g=>g.habit&&sched(g,T)),rest=act.filter(g=>g.habit&&!sched(g,T)),hDone=hab.filter(g=>g.habitLog.includes(T)).length;
   const total=hab.length+((fr||eaten)?1:0),done=hDone+(eaten?1:0);
   const pct=total?Math.round(done/total*100):0;
   let h=`<p class="quote">${esc(quote())}</p>`;
@@ -647,7 +1117,7 @@ function vToday(){
   if(act.length){
     h+=`<div class="today-meter">${ring(pct,76,8,done+'/'+(total||0),17)}<div class="sp"><div style="font-weight:700;font-size:17px">${pct===100?'Perfect day':'Your day so far'}</div>
       <div class="mute">${pct===100?'Everything you planned is done.':'Frog and daily actions'}</div></div>
-      <span class="chip fire">${ic('flame',17)}${overallStreak()}</span></div>`;
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end"><span class="chip fire">${ic('flame',17)}${overallStreak()}</span><span class="chip" title="Streak freezes">${ic('snow',16)}${S.freezes}</span></div></div>`;
     h+='<div class="week">';
     for(let i=6;i>=0;i--){
       const d=addDays(T,-i),dt=new Date(d+'T00:00:00');
@@ -664,11 +1134,13 @@ function vToday(){
     hab.forEach(g=>{
       const on=g.habitLog.includes(T);
       h+=`<div class="item rip" data-act="th" data-id="${g.id}"><button class="chk ${on?'on':''} ${justToggled==='h'+g.id?'pop':''}" aria-label="Toggle">${ic('check')}</button>
-        <div class="sp"><div class="t ${on?'striked':''}">${esc(g.habit)}</div><div class="meta">${esc(g.title.length>46?g.title.slice(0,46)+'…':g.title)}</div></div>
+        <div class="sp"><div class="t ${on?'striked':''}">${gEmoji(g)} ${esc(g.habit)}</div><div class="meta">${daysLabel(g)} · ${esc(g.title.length>46?g.title.slice(0,46)+'…':g.title)}</div></div>
         ${streak(g)?`<span class="streak">${ic('flame',16)}${streak(g)}</span>`:''}</div>`;
     });
     h+='</div>';
   }
+  if(rest.length)h+=`<div class="mute" style="margin-top:6px">Resting today: ${rest.map(g=>esc(g.habit)).join(', ')}</div>`;
+  if((new Date().getDay()+6)%7>=5&&!S.weekly[weekStart(T)]&&act.length)h+=`<div class="lvl rip" data-act="weekly"><div class="badge">${ic('cal',22)}</div><div class="sp"><div style="font-weight:700">Time for your weekly review</div><div class="mute">Two minutes: your win, what slipped, next week's frog.</div></div><span class="chev" style="color:var(--mute)">${ic('chev',18)}</span></div>`;
   const soon=S.goals.filter(g=>g.status==='active').flatMap(g=>g.tasks.filter(t=>!t.done&&t.deadline).map(t=>({g,t}))).sort((a,b)=>a.t.deadline.localeCompare(b.t.deadline)).slice(0,4);
   if(soon.length){
     h+=`<h2 class="sec"><span>Coming up</span></h2><div class="list">`+soon.map(x=>`<div class="item rip" data-act="open" data-id="${x.g.id}"><div class="sp"><div class="t">${esc(x.t.title)}</div><div class="meta">${esc(x.g.category)}</div></div><div class="meta" style="margin:0">${due(x.t.deadline)}</div></div>`).join('')+'</div>';
@@ -683,18 +1155,19 @@ function vGoals(){
   let h='';
   if(!act.length)h+=`<div class="empty">${frogSVG()}<h3>No active goals</h3>Tap New goal to write your first one.</div>`;
   else h+=`<div class="mute" style="margin:0 0 4px">${act.length} active, sorted by priority. Star the one that would change your life most.</div><div class="list">${act.map(goalRow).join('')}</div>`;
+  h+=`<div style="margin-top:14px"><button class="btn soft sm rip" data-act="tmpl">${ic('plus',16)}Start from a template</button></div>`;
   if(done.length)h+=`<h2 class="sec"><span>Achieved</span>${ic('trophy',20)}</h2><div class="list">${done.map(goalRow).join('')}</div>`;
   return h;
 }
 function vDetail(g){
   const p=prog(g),T=today(),on=g.habitLog.includes(T);
   let h=`<button class="btn ghost back rip" data-act="back">${ic('back',20)}All goals</button>
-  <div class="dhead">${ring(p,84,9,g.status==='done'?ic('trophy',28):p+'%',19)}<div class="sp"><h2>${g.top?`<span style="color:var(--sun)">${ic('star',20)}</span> `:''}${esc(g.title)}</h2></div></div>
+  <div class="dhead">${ring(p,84,9,g.status==='done'?ic('trophy',28):p+'%',19,gColor(g))}<div class="sp"><h2>${gEmoji(g)} ${g.top?`<span style="color:var(--sun)">${ic('star',20)}</span> `:''}${esc(g.title)}</h2></div></div>
   <div class="meta" style="margin-top:12px">${pri(g.priority)}<span>${esc(g.category)}</span>${due(g.deadline)}</div>
   ${g.why?`<p class="mute" style="margin:12px 0 0;font-size:15px">${esc(g.why)}</p>`:''}
   <div class="row" style="margin-top:16px;flex-wrap:wrap"><button class="btn soft sm rip" data-act="editg" data-id="${g.id}">${ic('edit',16)}Edit</button>${g.status!=='done'?`<button class="btn soft sm rip" data-act="focusg" data-id="${g.id}">${ic('timer',16)}Focus</button>`:''}
   ${g.status==='done'?`<button class="btn soft sm rip" data-act="reopen" data-id="${g.id}">Reopen</button>`:`<button class="btn sm rip" data-act="achieve" data-id="${g.id}">${ic('trophy',16)}Mark achieved</button>`}</div>`;
-  if(g.habit)h+=`<div class="panel row rip" data-act="th" data-id="${g.id}"><button class="chk ${on?'on':''} ${justToggled==='h'+g.id?'pop':''}" aria-label="Toggle">${ic('check')}</button><div class="sp"><div class="t ${on?'striked':''}" style="font-weight:650">${esc(g.habit)}</div><div class="meta">Daily action</div></div>${streak(g)?`<span class="streak">${ic('flame',16)}${streak(g)}</span>`:''}</div>`;
+  if(g.habit)h+=`<div class="panel row rip" data-act="th" data-id="${g.id}"><button class="chk ${on?'on':''} ${justToggled==='h'+g.id?'pop':''}" aria-label="Toggle">${ic('check')}</button><div class="sp"><div class="t ${on?'striked':''}" style="font-weight:650">${esc(g.habit)}</div><div class="meta">Daily action · ${daysLabel(g)}</div></div>${streak(g)?`<span class="streak">${ic('flame',16)}${streak(g)}</span>`:''}</div>`;
   h+=`<h2 class="sec"><span>Plan</span><button class="btn sm rip" data-act="addt" data-id="${g.id}">${ic('plus',16)}Add task</button></h2>`;
   if(!g.tasks.length)h+=`<div class="empty" style="padding:10px 0 0">List everything you need to do for this goal. Keep adding as you think of more.</div>`;
   h+='<div class="timeline">';
@@ -729,11 +1202,15 @@ function vPlan(){
 }
 function vMore(){
   const total=S.goals.length,done=S.goals.filter(g=>g.status==='done').length;
-  return `<div class="panel" style="margin-top:4px"><div class="row"><div class="sp"><div style="font-weight:700;font-size:18px">${total} goals, ${done} achieved</div><div class="mute">${overallStreak()}-day streak</div></div>${ring(total?Math.round(done/total*100):0,56,6,done+'',16)}</div></div>
+  return accountPanel()+`<div class="panel"><div class="row"><div class="sp"><div style="font-weight:700;font-size:18px">${total} goals, ${done} achieved</div><div class="mute">${overallStreak()}-day streak</div></div>${ring(total?Math.round(done/total*100):0,56,6,done+'',16)}</div></div>
   <h2 class="sec"><span>Preferences</span></h2>
   <label style="margin-top:4px">Your name</label><input id="nm" value="${esc(S.name)}" placeholder="Shown in your daily greeting" data-act="name">
   <label>Appearance</label><div class="seg">${[['auto','Auto'],['dark','Dark'],['light','Light']].map(a=>`<button class="${S.theme===a[0]?'on':''}" data-act="theme" data-v="${a[0]}">${a[1]}</button>`).join('')}</div>
   <label>Vibration feedback</label><div class="seg">${[[1,'On'],[0,'Off']].map(a=>`<button class="${(+S.haptics)===a[0]?'on':''}" data-act="hap" data-v="${a[0]}">${a[1]}</button>`).join('')}</div>
+  <label>Sound effects</label><div class="seg">${[[1,'On'],[0,'Off']].map(a=>`<button class="${(+S.sound)===a[0]?'on':''}" data-act="snd" data-v="${a[0]}">${a[1]}</button>`).join('')}</div>
+  <label>Accent color</label><div class="sw3">${Object.keys(ACC).map(k=>`<button class="${S.accent===k?'on':''}" data-act="acc" data-v="${k}" style="background:${ACC[k][0]}" aria-label="${k}"></button>`).join('')}</div>
+  <div style="margin-top:16px"><button class="btn soft sm rip" data-act="tour">Replay the intro</button></div>
+  ${lockSection()}
   <h2 class="sec"><span>Reminders</span></h2><div class="mute" style="margin-bottom:12px">A morning nudge to eat your frog and an evening nudge to protect your streak. Works in the installed Android app.</div>
   <div class="seg">${[[1,'On'],[0,'Off']].map(a=>`<button class="${(+S.remind.on)===a[0]?'on':''}" data-act="rem" data-v="${a[0]}">${a[1]}</button>`).join('')}</div>
   <label>Morning reminder time</label><input type="time" id="rtime" value="${S.remind.time}">
@@ -759,7 +1236,9 @@ function vInsights(){
   h+=`<h2 class="sec"><span>Badges</span><span class="mute" style="flex:none;font-weight:400;font-size:14px">${BADGES.filter(b=>S.badges[b[0]]).length} of ${BADGES.length}</span></h2><div class="badges">`+BADGES.map(b=>{const on=!!S.badges[b[0]];return `<div class="bdg ${on?'':'lock'}"><div class="ico">${ic(on?b[4]:'lock')}</div><b>${b[1]}</b><span>${b[2]}</span></div>`}).join('')+'</div>';
   const wins=Object.entries(S.wins).filter(w=>w[1]).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,5);
   if(wins.length)h+=`<h2 class="sec"><span>Recent wins</span></h2>`+wins.map(w=>`<div class="win"><time>${new Date(w[0]+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'})}</time><div>${esc(w[1])}</div></div>`).join('');
-  h+=`<div style="margin-top:26px"><button class="btn soft sm rip" data-act="share">${ic('share',16)}Share my progress</button></div>`;
+  const wk=Object.entries(S.weekly).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,3);
+  if(wk.length)h+=`<h2 class="sec"><span>Weekly reviews</span></h2>`+wk.map(w=>`<div class="win"><time>${new Date(w[0]+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'})}</time><div>${esc(w[1].win||'No win noted')}${w[1].slipped?`<div class="mute">Slipped: ${esc(w[1].slipped)}</div>`:''}</div></div>`).join('');
+  h+=`<div class="row" style="margin-top:26px;flex-wrap:wrap"><button class="btn sm rip" data-act="weekly">${ic('cal',16)}Weekly review</button><button class="btn soft sm rip" data-act="share">${ic('share',16)}Share card</button></div>`;
   return h;
 }
 /* ---------- render ---------- */
@@ -781,7 +1260,7 @@ function render(animate){
   else{
     if(view==='today'){
       const hr=new Date().getHours(),gr=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
-      ht.textContent=gr+(S.name?', '+S.name:'');
+      const nm=S.name||(me&&me.name?me.name.split(' ')[0]:'');ht.textContent=gr+(nm?', '+nm:'');
       hs.textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long'});
     }else{ht.textContent=TITLES[view][0];hs.textContent=TITLES[view][1]}
     m.innerHTML={today:vToday,goals:vGoals,plan:vPlan,insights:vInsights,more:vMore}[view]();
@@ -825,6 +1304,19 @@ document.getElementById('main').addEventListener('click',e=>{
     const nt=nextTasks();if(!nt.length)return;
     sheet('Choose today\'s frog',[{k:'f',label:'The task you least want to do, and the one that matters most',type:'select',value:(currentFrog()||nt[0]).t.id,opts:nt.map(x=>[x.t.id,x.t.title+'  ('+x.g.category+')'])}],v=>{S.frogs[today()]=v.f;S.frogDone[today()]=false;save();render()});
   }
+  else if(a==='signin')showLogin();
+  else if(a==='signout')signOutNow();
+  else if(a==='syncnow')syncNow(true);
+  else if(a==='tmpl')templateSheet();
+  else if(a==='weekly')weeklyReview();
+  else if(a==='snd'){S.sound=el.dataset.v==='1';save();render();sfx('tick')}
+  else if(a==='acc'){S.accent=el.dataset.v;save();applyTheme();render();haptic(10)}
+  else if(a==='tour')showTour(true);
+  else if(a==='pinon')setPinFlow();
+  else if(a==='pinchg')verifyPinFlow(()=>setPinFlow(),'Enter current PIN');
+  else if(a==='pinoff')verifyPinFlow(()=>{localStorage.removeItem(PIN_KEY);localStorage.removeItem(FAIL_KEY);toast('App lock is off');render()},'Turn off app lock');
+  else if(a==='autolock'){localStorage.setItem(AUTO_KEY,el.dataset.v);render()}
+  else if(a==='delacct')deleteAccount();
   else if(a==='focus')openFocus(gid,id);
   else if(a==='focusg'){const g=goalById(id);const t=g.tasks.find(x=>!x.done&&unlocked(g,x));openFocus(t?g.id:null,t?t.id:null)}
   else if(a==='share')shareProgress();
@@ -855,10 +1347,109 @@ addEventListener('popstate',()=>{
 });
 if(matchMedia)matchMedia('(prefers-color-scheme:light)').addEventListener&&matchMedia('(prefers-color-scheme:light)').addEventListener('change',applyTheme);
 
+
+/* ---------- app lock ---------- */
+const PIN_KEY='etf-pin',FAIL_KEY='etf-pin-fail',AUTO_KEY='etf-autolock';
+let locked=false,hiddenAt=0,coverEl=null;
+const pinCfg=()=>{try{return JSON.parse(localStorage.getItem(PIN_KEY))}catch(e){return null}};
+const autoLockSec=()=>{const v=localStorage.getItem(AUTO_KEY);return v==null?30:+v};
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+async function pinHash(pin,salt){
+  try{
+    const enc=new TextEncoder(),k=await crypto.subtle.importKey('raw',enc.encode(pin),'PBKDF2',false,['deriveBits']);
+    return 'p'+hex(await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},k,256));
+  }catch(e){let x=5381;for(const c of salt+pin+salt)x=((x<<5)+x+c.charCodeAt(0))>>>0;return 'x'+x}
+}
+async function savePin(pin){
+  const salt=hex(crypto.getRandomValues(new Uint8Array(16)));
+  localStorage.setItem(PIN_KEY,JSON.stringify({salt,hash:await pinHash(pin,salt)}));
+  localStorage.removeItem(FAIL_KEY);
+}
+const failState=()=>{try{return JSON.parse(localStorage.getItem(FAIL_KEY))||{n:0,until:0}}catch(e){return{n:0,until:0}}};
+async function checkPin(pin){
+  const f=failState(),now=Date.now();
+  if(f.until>now)return 'Too many tries. Wait '+Math.ceil((f.until-now)/1000)+'s.';
+  const c=pinCfg();
+  if(c&&await pinHash(pin,c.salt)===c.hash){localStorage.removeItem(FAIL_KEY);return null}
+  f.n++;
+  if(f.n>=5){f.until=now+Math.min(900,30*Math.pow(2,f.n-5))*1000}
+  localStorage.setItem(FAIL_KEY,JSON.stringify(f));
+  return f.until>now?'Too many tries. Wait '+Math.ceil((f.until-now)/1000)+'s.':'Wrong PIN. '+(5-f.n)+' tries left.';
+}
+function pinPad(o){
+  const ov=document.createElement('div');ov.className='pinov';let pin='',busy=false;
+  ov.innerHTML=`<div class="top">${frogSVG().replace('<svg','<svg class="frog"')}<h2>${esc(o.title)}</h2><div class="sub" id="psub">${esc(o.sub||'')}</div><div class="pdots" id="pd">${'<i></i>'.repeat(4)}</div></div>
+  <div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-k="${n}">${n}</button>`).join('')}<button class="nul"></button><button data-k="0">0</button><button data-k="x" aria-label="Delete">${ic('back',22)}</button></div>
+  ${o.extra||''}`;
+  document.body.appendChild(ov);
+  const dots=()=>ov.querySelectorAll('#pd i').forEach((d,k)=>d.classList.toggle('on',k<pin.length));
+  const ctl={el:ov,close(){ov.remove()}};
+  async function press(k){
+    if(busy)return;
+    if(k==='x')pin=pin.slice(0,-1);
+    else if(pin.length<4)pin+=k;
+    haptic(6);dots();
+    if(pin.length===4){
+      busy=true;const e=await o.onDone(pin,ctl);busy=false;
+      if(e){const s=ov.querySelector('#psub');if(s){s.textContent=e;s.classList.add('bad')}const d=ov.querySelector('#pd');d.classList.add('bad');haptic(80);setTimeout(()=>{d.classList.remove('bad');pin='';dots()},420)}
+      else ov.remove();
+    }
+  }
+  ov.addEventListener('click',e=>{
+    const b=e.target.closest('[data-k]');if(b)press(b.dataset.k);
+    else if(e.target.closest('[data-pc]'))o.onExtra&&o.onExtra(e.target.closest('[data-pc]').dataset.pc,ctl);
+  });
+  if(o.keys!==false)ov._kd=ev=>{if(!document.body.contains(ov))return removeEventListener('keydown',ov._kd);if(/^\d$/.test(ev.key))press(ev.key);else if(ev.key==='Backspace')press('x')};
+  if(ov._kd)addEventListener('keydown',ov._kd);
+  return ctl;
+}
+function lockApp(){
+  if(!pinCfg()||locked)return;
+  locked=true;
+  pinPad({title:'Welcome back',sub:'Enter your PIN',
+    extra:'<button class="lnk" data-pc="forgot">Forgot PIN?</button>',
+    onDone:async pin=>{const e=await checkPin(pin);if(!e){locked=false;sfx('tick');setTimeout(()=>{if(!me&&S.toured&&!localStorage.getItem('etf-login-seen')&&cloudReady())showLogin()},900)}return e},
+    onExtra:(a)=>{if(a==='forgot'&&confirm('Reset the app lock? This erases the goals stored on this phone. If you signed in before, sign in again to restore your cloud backup.')){Object.keys(localStorage).filter(k=>k.startsWith('etf')).forEach(k=>localStorage.removeItem(k));location.reload()}}
+  });
+}
+function setPinFlow(done){
+  pinPad({title:'Create a PIN',sub:'Choose 4 digits',onDone:(p1,c1)=>{
+    c1.close();
+    pinPad({title:'Confirm your PIN',sub:'Enter it once more',onDone:async p2=>{
+      if(p2!==p1)return 'The PINs do not match';
+      await savePin(p2);toast('App lock is on');haptic([20,40,20]);render();done&&done();return null;
+    }});
+    return null;
+  }});
+}
+function verifyPinFlow(then,title){
+  pinPad({title:title||'Enter your PIN',sub:'To continue',extra:'<button class="lnk" data-pc="cancel">Cancel</button>',
+    onDone:async(p,c)=>{const e=await checkPin(p);if(!e){setTimeout(then,60)}return e},
+    onExtra:(a,c)=>{if(a==='cancel')c.close()}});
+}
+function lockSection(){
+  const on=!!pinCfg(),as=autoLockSec();
+  return `<h2 class="sec"><span>Security</span></h2><div class="mute" style="margin-bottom:12px">${on?'Your goals are locked behind a PIN. The PIN stays on this phone only.':'Add a PIN so nobody else can open your goals.'}</div>
+  ${on?`<div class="row" style="margin-bottom:6px"><button class="btn soft sm rip" data-act="pinchg">${ic('lock',16)}Change PIN</button><button class="btn danger sm rip" data-act="pinoff">Turn off</button></div>
+  <label>Lock after leaving the app</label><div class="seg">${[[0,'Instant'],[30,'30 sec'],[300,'5 min']].map(a=>`<button class="${as===a[0]?'on':''}" data-act="autolock" data-v="${a[0]}">${a[1]}</button>`).join('')}</div>`
+  :`<button class="btn sm rip" data-act="pinon">${ic('lock',16)}Turn on app lock</button>`}`;
+}
+document.addEventListener('visibilitychange',()=>{
+  if(!pinCfg())return;
+  if(document.hidden){hiddenAt=Date.now();if(!coverEl&&!locked){coverEl=document.createElement('div');coverEl.className='pincover';document.body.appendChild(coverEl)}}
+  else{
+    if(coverEl){coverEl.remove();coverEl=null}
+    if(!locked&&Date.now()-hiddenAt>=autoLockSec()*1000)lockApp();
+  }
+});
+
 /* ---------- boot ---------- */
 document.querySelector('#splash .stage').insertAdjacentHTML('afterbegin',frogSVG());
+if(pinCfg())lockApp();
 checkBadges(true);
+applyFreezes();
 render(true);
+initCloud();maybeTour();
 setTimeout(()=>{const s=document.getElementById('splash');s.classList.add('go');setTimeout(()=>s.remove(),700)},2000);
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
