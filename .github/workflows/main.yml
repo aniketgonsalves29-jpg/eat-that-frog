@@ -39,7 +39,28 @@ jobs:
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" > /dev/null || true
-      - run: npm ci
+      - name: Install app dependencies and Google sign-in plugins
+        run: |
+          npm ci
+          npm install --no-audit --no-fund @capacitor-firebase/authentication@8.5.2 @capacitor/share@8.0.3 @capacitor/filesystem@8.1.4
+      - name: Configure Google sign-in
+        run: |
+          node -e "
+          const fs=require('fs');const c=JSON.parse(fs.readFileSync('capacitor.config.json'));
+          c.plugins=Object.assign(c.plugins||{},{
+            FirebaseAuthentication:{skipNativeAuth:false,providers:['google.com']},
+            CapacitorHttp:{enabled:true}});
+          fs.writeFileSync('capacitor.config.json',JSON.stringify(c,null,2));"
+          sed -i 's/^ext {/ext {\n    rgcfaIncludeGoogle = true/' android/variables.gradle
+          grep -n rgcfaIncludeGoogle android/variables.gradle
+          sed -i 's/android:allowBackup="true"/android:allowBackup="false"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/<application/<application android:usesCleartextTraffic="false"/' android/app/src/main/AndroidManifest.xml
+          grep -n "allowBackup\|usesCleartext" android/app/src/main/AndroidManifest.xml
+          node -e "
+          const fs=require('fs');let id='';
+          try{id=JSON.parse(fs.readFileSync('android/app/google-services.json')).project_info.project_id}catch(e){}
+          fs.writeFileSync('www/cloud-config.js','window.CLOUD='+JSON.stringify({projectId:id})+';');"
+          cat www/cloud-config.js
       - run: npx cap sync android
       - run: chmod +x android/gradlew
       - run: ./gradlew assembleDebug --no-daemon
