@@ -42,7 +42,7 @@ jobs:
       - name: Install app dependencies and Google sign-in plugins
         run: |
           npm ci
-          npm install --no-audit --no-fund @capacitor-firebase/authentication@8.5.2 @capacitor/share@8.0.3 @capacitor/filesystem@8.1.4
+          npm install --no-audit --no-fund @capacitor-firebase/authentication@8.5.2 @capacitor/share@8.0.3 @capacitor/filesystem@8.1.4 @capacitor-mlkit/barcode-scanning@8.2.1
       - name: Configure Google sign-in
         run: |
           node -e "
@@ -90,6 +90,9 @@ jobs:
           python3 make_sounds.py android/app/src/main/res/raw
           ls -la android/app/src/main/res/raw
           sed -i 's#</manifest>#    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          grep -q 'android.permission.CAMERA' android/app/src/main/AndroidManifest.xml || sed -i 's#</manifest>#    <uses-permission android:name="android.permission.CAMERA"/>\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          grep -q 'com.google.mlkit.vision.DEPENDENCIES' android/app/src/main/AndroidManifest.xml || sed -i 's#</application>#    <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>\n    </application>#' android/app/src/main/AndroidManifest.xml
+          grep -n "CAMERA\|DEPENDENCIES" android/app/src/main/AndroidManifest.xml
           grep -n "EXACT_ALARM" android/app/src/main/AndroidManifest.xml
       - run: npx cap sync android
       - run: chmod +x android/gradlew
