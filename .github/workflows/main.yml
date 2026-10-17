@@ -1,41 +1,40 @@
-name: Deploy to GitHub Pages
+name: Build Android APK
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
-      - name: Collect site files
-        run: |
-          mkdir -p _site
-          if [ -f index.html ]; then cp index.html _site/index.html
-          else
-            f=$(ls *.html 2>/dev/null | head -n 1)
-            if [ -z "$f" ]; then echo "No .html file found in the repo root. Upload index.html there."; exit 1; fi
-            cp "$f" _site/index.html
-          fi
-          for f in manifest.json sw.js icon*.png favicon.ico; do if [ -f "$f" ]; then cp "$f" _site/; fi; done
-          ls -la _site
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          path: _site
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync web app into Android project
+        run: npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: eat-that-frog-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
