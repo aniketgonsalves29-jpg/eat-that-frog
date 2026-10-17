@@ -21,12 +21,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Collect site files
         run: |
-          mkdir _site
-          cp index.html _site/
-          for f in manifest.json sw.js icon*.png favicon.ico; do [ -f "$f" ] && cp "$f" _site/ || true; done
+          mkdir -p _site
+          if [ -f index.html ]; then cp index.html _site/index.html
+          else
+            f=$(ls *.html 2>/dev/null | head -n 1)
+            if [ -z "$f" ]; then echo "No .html file found in the repo root. Upload index.html there."; exit 1; fi
+            cp "$f" _site/index.html
+          fi
+          for f in manifest.json sw.js icon*.png favicon.ico; do if [ -f "$f" ]; then cp "$f" _site/; fi; done
+          ls -la _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
