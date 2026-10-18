@@ -94,6 +94,10 @@ jobs:
           grep -q 'com.google.mlkit.vision.DEPENDENCIES' android/app/src/main/AndroidManifest.xml || sed -i 's#</application>#    <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>\n    </application>#' android/app/src/main/AndroidManifest.xml
           grep -n "CAMERA\|DEPENDENCIES" android/app/src/main/AndroidManifest.xml
           grep -n "EXACT_ALARM" android/app/src/main/AndroidManifest.xml
+      - name: Allow the phone's text to speech (pronunciation)
+        run: |
+          grep -q 'TTS_SERVICE' android/app/src/main/AndroidManifest.xml || sed -i 's#<application#<queries><intent><action android:name="android.intent.action.TTS_SERVICE"/></intent></queries>\n    <application#' android/app/src/main/AndroidManifest.xml
+          grep -n "TTS_SERVICE" android/app/src/main/AndroidManifest.xml
       - run: npx cap sync android
       - run: chmod +x android/gradlew
       - run: ./gradlew assembleDebug --no-daemon
