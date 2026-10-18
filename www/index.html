@@ -996,6 +996,76 @@ nav button svg{font-size:21px}
 .vbbook .srow svg:first-child{color:var(--go)}
 .vbbar .btn+.btn{margin-left:0}
 [hidden]{display:none!important}
+
+/* ===== final polish: glass, AMOLED, scrollbar, today layout ===== */
+:root{--gb:20px;--ga:.58}
+:root[data-glass="0"]{--gb:0px;--ga:.96}
+:root[data-glass="2"]{--gb:34px;--ga:.34}
+#amb{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(55% 34% at 88% 6%,color-mix(in srgb,var(--go) 20%,transparent),transparent 72%),
+  radial-gradient(50% 32% at 4% 48%,color-mix(in srgb,var(--sky) 13%,transparent),transparent 72%),
+  radial-gradient(60% 34% at 92% 92%,color-mix(in srgb,var(--vio) 14%,transparent),transparent 72%)}
+:root[data-glass="0"] #amb{opacity:.55}
+header,main{position:relative;z-index:1}
+header{background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+header:after{display:none}
+.hero,.tile,.note-card,.md-card,.tk,.lvl,.panel,.cd,.coach,.sumcard,.ck-h,.bpc,.cal,.inscard,.tcust,.nmore,.win,.heat,.bres{
+  background-color:color-mix(in srgb,var(--s1) calc(var(--ga)*100%),transparent);
+  -webkit-backdrop-filter:blur(var(--gb)) saturate(1.6);backdrop-filter:blur(var(--gb)) saturate(1.6);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.28),0 20px 38px -24px rgba(0,0,0,.75)}
+:root[data-theme=light] .hero,:root[data-theme=light] .tile,:root[data-theme=light] .note-card,:root[data-theme=light] .md-card,:root[data-theme=light] .tk,:root[data-theme=light] .lvl,:root[data-theme=light] .panel,:root[data-theme=light] .cd,:root[data-theme=light] .coach,:root[data-theme=light] .sumcard,:root[data-theme=light] .ck-h,:root[data-theme=light] .inscard{border-color:rgba(255,255,255,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 16px 30px -22px var(--sh)}
+:root[data-theme=amoled] .hero,:root[data-theme=amoled] .tile,:root[data-theme=amoled] .note-card,:root[data-theme=amoled] .md-card,:root[data-theme=amoled] .tk,:root[data-theme=amoled] .lvl,:root[data-theme=amoled] .panel,:root[data-theme=amoled] .cd,:root[data-theme=amoled] .coach,:root[data-theme=amoled] .sumcard,:root[data-theme=amoled] .ck-h,:root[data-theme=amoled] .inscard{background-color:color-mix(in srgb,#0b0e0d calc(var(--ga)*100%),transparent);border-color:rgba(255,255,255,.08)}
+:root[data-theme=amoled]{--bg:#000}
+:root[data-theme=amoled] #amb{opacity:.8}
+.overlay{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(0,0,0,.55)}
+.sheet{background-color:color-mix(in srgb,var(--s1) 86%,transparent);-webkit-backdrop-filter:blur(30px) saturate(1.6);backdrop-filter:blur(30px) saturate(1.6)}
+nav{-webkit-backdrop-filter:blur(30px) saturate(1.7);backdrop-filter:blur(30px) saturate(1.7);width:min(calc(100% - 28px),440px);grid-template-columns:repeat(6,1fr)}
+nav .ind{width:calc((100% - 12px)/6)}
+nav button{font-size:10.5px}
+.cd .srow,.cd .item{background:none}
+/* scrollbar */
+html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--go) 50%,transparent) transparent}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:transparent;margin:6px 0}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,color-mix(in srgb,var(--go) 80%,transparent),color-mix(in srgb,var(--go) 30%,transparent));border-radius:99px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:var(--go);background-clip:padding-box}
+.chips::-webkit-scrollbar,.bstrip::-webkit-scrollbar{display:none}
+/* today layout */
+.sumcard{display:flex;align-items:center;gap:14px;margin-top:6px;padding:12px 14px;border-radius:var(--r-lg)}
+.sumcard .sumt{font-weight:700;font-size:16.5px;line-height:1.15}
+.sumch{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.wdots{display:flex;gap:6px;margin-top:8px}
+.wdots i{width:16px;height:16px;border-radius:50%;background:color-mix(in srgb,var(--mute) 22%,transparent);display:block}
+.wdots i.on{background:var(--go);box-shadow:0 0 10px -2px var(--go)}
+.wdots i.now{outline:2px solid color-mix(in srgb,var(--go) 60%,transparent);outline-offset:2px}
+.hero{margin-top:12px;padding:18px 18px 16px}
+.hero h2{font-size:clamp(20px,6vw,24px)}
+.hero .acts{margin-top:14px}
+.hero .frogbox{width:110px;top:12px}
+.coachrow.nudges{margin:14px 0 4px;gap:8px}
+.nudges .note-card{margin:0}
+.nmore{border-radius:99px;padding:9px 16px;color:var(--mute);font-weight:650;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;align-self:center}
+.ckwrap{margin-top:14px}
+.ck-h{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 14px;border-radius:var(--r-md);color:var(--ink);font:inherit}
+.ck-h .ci{color:var(--pink);display:flex;font-size:20px}
+.ck-h b{display:block;font-size:15.5px}.ck-h small{color:var(--mute);font-size:13px}
+.ck-h .chev{color:var(--mute);transition:transform .3s var(--ease);display:flex}.ck-h .chev.up{transform:rotate(90deg)}
+.ckbody{margin-top:4px}
+.ckbody.no-w .tk-w,.ckbody.no-s [data-act=sleepsheet],.ckbody.no-g [data-act=weightsheet]{display:none}
+.tcust{display:flex;align-items:center;gap:8px;margin:26px auto 0;padding:11px 18px;border-radius:99px;color:var(--mute);font-weight:650;font-size:13.5px}
+.inscard{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin-top:14px;padding:14px 16px;border-radius:var(--r-md);color:var(--ink);font:inherit}
+.inscard .ci{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--sun) 20%,transparent);color:var(--sun);font-size:22px}
+.inscard b{display:block;font-size:16px}.inscard small{color:var(--mute);font-size:13px}.inscard .chev{color:var(--mute);display:flex}
+.sp0{height:10px}
+.edrow .kb{width:36px;height:36px;color:var(--mute);background:var(--s2)}.edrow .kb:disabled{opacity:.3}
+.ar-u svg{transform:rotate(-90deg)}.ar-d svg{transform:rotate(90deg)}
+:root[data-density=compact] .item{padding:9px 4px}
+:root[data-density=compact] .hero{padding:14px 16px 12px}
+:root[data-density=compact] .sec{margin-top:18px}
+:root[data-density=compact] .coach,:root[data-density=compact] .note-card{padding:10px 12px}
+:root[data-density=compact] main{padding-top:2px}
+@media (prefers-reduced-motion:reduce){.nmore,.ck-h .chev{transition:none}}
 </style>
 </head>
 <body>
@@ -1003,6 +1073,7 @@ nav button svg{font-size:21px}
 <header><h1 id="ht"></h1><p id="hs"></p></header>
 <main id="main"></main>
 <button class="fab" id="fab"></button>
+<div id="amb" aria-hidden="true"></div>
 <nav id="nav"><span class="ind"></span></nav>
 <canvas id="confetti"></canvas>
 <script src="cloud-config.js"></script>
@@ -1169,7 +1240,7 @@ if(!S){
   if(S)restoredFromBackup=true;
 }
 if(!S)S=seed();
-function ensure(){S.frogs=S.frogs||{};S.reviewed=S.reviewed||{};S.frogDone=S.frogDone||{};S.theme=S.theme||'auto';S.haptics=S.haptics!==false;S.name=S.name||'';S.xp=S.xp||0;S.focus=S.focus||{};S.focusGoal=S.focusGoal||{};S.badges=S.badges||{};S.wins=S.wins||{};S.remind=S.remind||{on:false,time:'07:30'};S.remind.eve=S.remind.eve||'21:00';S.remind.sound=S.remind.sound||'chime';S.weekly=S.weekly||{};S.one=S.one||{};S.journal=S.journal||{};S.plan=S.plan||{items:[],seq:0};S.plan.items=S.plan.items||[];S.plan.seq=Math.max(S.plan.seq||0,...S.plan.items.map(i=>i.nid||0));S.freezes=S.freezes==null?1:S.freezes;S.sound=S.sound!==false;S.accent=S.accent||'lily';S.mood=S.mood||{};S.gord=S.gord||[];S.master=Array.isArray(S.master)?S.master:[];S.planned=S.planned||{};S.gsort=S.gsort||'priority';S.readGoal=S.readGoal||12;S.track=S.track||{};['water','sleep','weight'].forEach(k=>S.track[k]=S.track[k]||{});S.waterGoal=S.waterGoal||8;{const v=S.vocab=S.vocab||{};v.saved=v.saved||[];v.custom=v.custom||[];v.srs=v.srs||{};v.act=v.act||{};v.notes=v.notes||{};v.meta=v.meta||{};v.recent=v.recent||[];v.lang=v.lang||'hi';v.goal=v.goal||10;v.rate=v.rate||.92;v.books=v.books||[];v.tags=v.tags||{};v.lastBook=v.lastBook||''}S.goals=S.goals||[];S.goals.forEach(fixGoal);S.nidSeq=Math.max(S.nidSeq||0,...S.goals.map(g=>g.nid||0));{const ids=new Set(S.goals.map(g=>g.id));S.gord=(Array.isArray(S.gord)?S.gord:[]).filter(i=>ids.has(i))}}
+function ensure(){S.frogs=S.frogs||{};S.reviewed=S.reviewed||{};S.frogDone=S.frogDone||{};S.theme=S.theme||'auto';S.haptics=S.haptics!==false;S.name=S.name||'';S.xp=S.xp||0;S.focus=S.focus||{};S.focusGoal=S.focusGoal||{};S.badges=S.badges||{};S.wins=S.wins||{};S.remind=S.remind||{on:false,time:'07:30'};S.remind.eve=S.remind.eve||'21:00';S.remind.sound=S.remind.sound||'chime';S.weekly=S.weekly||{};S.one=S.one||{};S.journal=S.journal||{};S.plan=S.plan||{items:[],seq:0};S.plan.items=S.plan.items||[];S.plan.seq=Math.max(S.plan.seq||0,...S.plan.items.map(i=>i.nid||0));S.freezes=S.freezes==null?1:S.freezes;S.sound=S.sound!==false;S.accent=S.accent||'lily';S.mood=S.mood||{};S.gord=S.gord||[];S.master=Array.isArray(S.master)?S.master:[];S.planned=S.planned||{};S.gsort=S.gsort||'priority';S.readGoal=S.readGoal||12;S.track=S.track||{};['water','sleep','weight'].forEach(k=>S.track[k]=S.track[k]||{});S.waterGoal=S.waterGoal||8;{const v=S.vocab=S.vocab||{};v.saved=v.saved||[];v.custom=v.custom||[];v.srs=v.srs||{};v.act=v.act||{};v.notes=v.notes||{};v.meta=v.meta||{};v.recent=v.recent||[];v.lang=v.lang||'hi';v.goal=v.goal||10;v.rate=v.rate||.92;v.books=v.books||[];v.tags=v.tags||{};v.lastBook=v.lastBook||''}S.ui=(S.ui&&typeof S.ui==='object')?S.ui:{};if(S.ui.v!==1){S.ui.v=1;if(S.theme!=='light')S.theme='amoled'}S.ui.today=S.ui.today||{};S.goals=S.goals||[];S.goals.forEach(fixGoal);S.nidSeq=Math.max(S.nidSeq||0,...S.goals.map(g=>g.nid||0));{const ids=new Set(S.goals.map(g=>g.id));S.gord=(Array.isArray(S.gord)?S.gord:[]).filter(i=>ids.has(i))}}
 ensure();
 let _bakT=0,_saveWarned=false;
 const keepBak=()=>{try{localStorage.setItem(KEY+'-bak',JSON.stringify(S))}catch(e){}};
@@ -1188,7 +1259,9 @@ function applyTheme(){
   const a=ACC[S.accent]||ACC.lily,st=document.documentElement.style;
   st.setProperty('--go',dark?a[0]:a[1]);st.setProperty('--goInk',dark?a[2]:'#fff');
   document.querySelector('meta[name=theme-color]').content=S.theme==='amoled'?'#000000':dark?'#0a1a17':'#eef4ec';
+  applyUI();
 }
+function applyUI(){const u=S.ui||{},r=document.documentElement;r.dataset.glass=u.glass==null?'1':String(u.glass);r.dataset.density=u.density||'cozy'}
 applyTheme();
 
 /* ---------- helpers ---------- */
@@ -1916,59 +1989,110 @@ function trackAct(a,el){
   if(a==='weightsheet'){const lw=lastWeight(T);sheet('Log your weight',[{k:'w',label:'Weight in kg',type:'number',value:S.track.weight[T]!=null?S.track.weight[T]:(lw?lw.v:''),ph:'72.4',hint:'Leave empty to clear today\'s entry.'}],v=>{const x=parseFloat(v.w);if(v.w===''||v.w==null){delete S.track.weight[T]}else{if(!(x>=20&&x<=400)){toast('Enter a weight between 20 and 400 kg');return false}S.track.weight[T]=Math.round(x*10)/10}save();render()});return true}
   return false;
 }
+/* ---------- Today: ordered, hideable sections ---------- */
+const TSEC=[['summary','Progress','Ring, streak and the last 7 days'],['frog',"Today's frog",'Your hardest task of the day'],['actions','Daily actions','Your habits for today'],['nudge','Smart prompts','One helpful prompt at a time'],['checkin','Daily check-in','Mood, water, sleep and weight'],['upcoming','Coming up','Your next deadlines'],['extras','Plan and word','Today\'s plan and word of the day'],['win',"Today's win",'One line about your day'],['level','Level and XP','Your level card'],['quote','Daily quote','A line of motivation']];
+const TDEF=TSEC.map(x=>x[0]),TOFF={level:1,quote:1};
+function tcfg(){const t=S.ui.today;const o=(Array.isArray(t.order)?t.order:[]).filter(i=>TDEF.includes(i));TDEF.forEach(i=>{if(!o.includes(i))o.push(i)});return{order:o,off:Object.assign({},t.off||TOFF)}}
+let nudgeOpen=false;
+function nudgeHTML(act,T){
+  if(!act.length)return '';
+  const hr=new Date().getHours(),P=coachParts(),L=[],oneOpen=!(S.one[T]&&S.one[T].done),qOpen=!(S.journal[T]&&S.journal[T].a);
+  const mc=missedCard();if(mc)L.push(mc);
+  if(hr>=18){if(P.pt)L.push(P.pt);if(qOpen)L.push(P.q);if(oneOpen)L.push(P.one)}
+  else{if(oneOpen)L.push(P.one);if(qOpen)L.push(P.q);if(P.pt)L.push(P.pt)}
+  if((new Date().getDay()+6)%7>=5&&!S.weekly[weekStart(T)])L.unshift(`<button class="coach rip" data-act="weekly"><span class="ci">${ic('cal',20)}</span><span class="cb"><small>Weekly review</small><b>Two minutes: your win, what slipped, next week's frog</b></span></button>`);
+  if(!S.reviewed[T])L.push(`<button class="coach rip" data-act="review"><span class="ci">${ic('target',20)}</span><span class="cb"><small>Daily review</small><b>I reviewed my goals today</b></span></button>`);
+  if(!L.length)return '';
+  L.push(P.master);
+  const first=L[0],more=L.slice(1);
+  let h=`<div class="coachrow nudges">${first}`;
+  if(more.length)h+=nudgeOpen?more.join('')+`<button class="nmore rip" data-act="nudgemore">Show less</button>`:`<button class="nmore rip" data-act="nudgemore">${ic('plus',15)}${more.length} more</button>`;
+  return h+'</div>';
+}
+function checkinHTML(T){
+  const c=tcfg(),off=c.off,m=S.mood[T]||0,w=S.track.water[T]||0,G=S.waterGoal||8,sl=S.track.sleep[T],lw=lastWeight(T),bits=[];
+  if(!off.mood)bits.push(m?MOODS[m-1][0]:'Mood');
+  if(!off.water)bits.push(w+'/'+G+' water');
+  if(!off.sleep)bits.push(sl!=null?sl+'h sleep':'Sleep');
+  if(!off.weight)bits.push(lw?lw.v+' kg':'Weight');
+  if(!bits.length)return '';
+  const open=!!S.ui.ck,tr=!(off.water&&off.sleep&&off.weight);
+  let h=`<div class="ckwrap"><button class="ck-h rip" data-act="ckt" aria-expanded="${open}"><span class="ci">${ic('heart',20)}</span><span class="sp"><b>Daily check-in</b><small>${esc(bits.join(' · '))}</small></span><span class="chev ${open?'up':''}">${ic('chev',18)}</span></button>`;
+  if(open)h+=`<div class="ckbody ${off.water?'no-w':''} ${off.sleep?'no-s':''} ${off.weight?'no-g':''}">${off.mood?'':moodCard(T)}${tr?trackCard(T):''}</div>`;
+  return h+'</div>';
+}
 function vToday(){
   const act=S.goals.filter(g=>g.status==='active'),fr=currentFrog(),T=today();
   const eaten=!!S.frogDone[T];
   const hab=orderHab(act.filter(g=>g.habit&&sched(g,T))),rest=act.filter(g=>g.habit&&!sched(g,T)),live=hab.filter(g=>!g.skipped.includes(T)),hDone=live.filter(g=>g.habitLog.includes(T)).length;
   const total=live.length+((fr||eaten)?1:0),done=hDone+(eaten?1:0);
-  const pct=total?Math.round(done/total*100):0;
-  let h=`<p class="quote">${esc(quote())}</p>`+timerBanner();
-  if(fr||eaten){
-    if(eaten){
-      h+=`<section class="hero eaten ${heroHop?'hop':''}"><div class="kicker">Frog eaten</div><h2>Nothing left to dread today.</h2>
+  const pct=total?Math.round(done/total*100):0,cfg=tcfg(),R={};
+  R.summary=()=>{
+    if(!act.length)return '';
+    let w='';
+    for(let i=6;i>=0;i--){const d=addDays(T,-i),on=S.goals.some(g=>g.habitLog.includes(d))||S.reviewed[d];w+=`<i class="${on?'on':''} ${i===0?'now':''}" title="${new Date(d+'T00:00:00').toLocaleDateString(undefined,{weekday:'short'})}"></i>`}
+    return `<div class="sumcard">${ring(pct,64,7,done+'/'+(total||0),15)}<div class="sp"><div class="sumt">${pct===100?'Perfect day':'Your day so far'}</div><div class="mute">${pct===100?'Everything planned is done.':'Frog and daily actions'}</div><div class="wdots">${w}</div></div><div class="sumch"><span class="chip fire">${ic('flame',16)}${overallStreak()}</span><span class="chip" title="Streak freezes">${ic('snow',15)}${S.freezes}</span></div></div>`;
+  };
+  R.frog=()=>{
+    let h='';
+    if(fr||eaten){
+      if(eaten){
+        h=`<section class="hero eaten ${heroHop?'hop':''}"><div class="kicker">Frog eaten</div><h2>Nothing left to dread today.</h2>
         <div class="goalline">${fr?'Ready for another one?':'All your tasks are done.'}</div>
         ${fr?`<div class="acts"><button class="btn rip" data-act="pickfrog">${ic('plus')}Choose another</button></div>`:''}
         <div class="frogbox">${frogSVG()}</div></section>`;
-    }else{
-      h+=`<section class="hero"><div class="kicker">Today's frog</div><h2>${esc(fr.t.title)}</h2>
+      }else{
+        h=`<section class="hero"><div class="kicker">Today's frog</div><h2>${esc(fr.t.title)}</h2>
         <div class="goalline">${esc(fr.g.title)}</div><div class="meta" style="margin-top:6px">${due(fr.t.deadline)}</div>
         <div class="acts"><button class="btn rip" data-act="tt" data-g="${fr.g.id}" data-id="${fr.t.id}">${ic('check')}Mark eaten</button><button class="btn soft rip" data-act="focus" data-g="${fr.g.id}" data-id="${fr.t.id}">${ic('timer',17)}Focus</button><button class="btn soft rip" data-act="pickfrog">Swap</button></div>
         <div class="frogbox">${frogSVG()}</div></section>`;
-    }
-  }else if(act.length){
-    h+=`<section class="hero"><div class="kicker">Today's frog</div><h2>Pick your hardest task</h2><div class="goalline">Open a goal and add tasks. The most important one lands here.</div>
+      }
+    }else if(act.length){
+      h=`<section class="hero"><div class="kicker">Today's frog</div><h2>Pick your hardest task</h2><div class="goalline">Open a goal and add tasks. The most important one lands here.</div>
       <div class="acts"><button class="btn rip" data-act="tab" data-v="goals">Open goals</button></div><div class="frogbox">${frogSVG()}</div></section>`;
-  }
-  heroHop=false;
-  if(act.length){
-    h+=`<div class="today-meter">${ring(pct,76,8,done+'/'+(total||0),17)}<div class="sp"><div style="font-weight:700;font-size:17px">${pct===100?'Perfect day':'Your day so far'}</div>
-      <div class="mute">${pct===100?'Everything you planned is done.':'Frog and daily actions'}</div></div>
-      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end"><span class="chip fire">${ic('flame',17)}${overallStreak()}</span><span class="chip" title="Streak freezes">${ic('snow',16)}${S.freezes}</span></div></div>`;
-    h+='<div class="week">';
-    for(let i=6;i>=0;i--){
-      const d=addDays(T,-i),dt=new Date(d+'T00:00:00');
-      const on=S.goals.some(g=>g.habitLog.includes(d))||S.reviewed[d];
-      h+=`<div class="wd ${on?'on':''} ${i===0?'now':''}"><i>${on?ic('check'):''}</i>${dt.toLocaleDateString(undefined,{weekday:'narrow'})}</div>`;
     }
-    h+='</div>';
-    h+=`<div style="margin-top:18px"><button class="btn ${S.reviewed[T]?'soft':''} sm rip" data-act="review">${ic(S.reviewed[T]?'check':'target',16)}${S.reviewed[T]?'Goals reviewed today':'I reviewed my goals today'}</button></div>`;
-    const L=lvl();
-    h+=`<div class="lvl rip" data-act="tab" data-v="profile"><div class="badge">${L.n}</div><div class="sp"><div style="font-weight:700;font-size:16px">${L.title}</div><div class="mute">${L.toNext} XP to level ${L.n+1}</div><div class="xpbar"><i style="width:${L.pct}%"></i></div></div><span class="chev" style="color:var(--mute)">${ic('chev',18)}</span></div>`;
-  }
-  h+=missedCard();
-  h+=coachCards();
-  h+=todayPlanCard();h+=(window.VB?VB.todayCard():'');
-  if(act.length)h+=moodCard(T)+trackCard(T);
-  if(hab.length)h+=habitSection(hab,rest,T);
-  else if(rest.length)h+=`<div class="mute" style="margin-top:14px">Resting today: ${rest.map(g=>esc(g.habit)).join(', ')}</div>`;
-  if((new Date().getDay()+6)%7>=5&&!S.weekly[weekStart(T)]&&act.length)h+=`<div class="lvl rip" data-act="weekly"><div class="badge">${ic('cal',22)}</div><div class="sp"><div style="font-weight:700">Time for your weekly review</div><div class="mute">Two minutes: your win, what slipped, next week's frog.</div></div><span class="chev" style="color:var(--mute)">${ic('chev',18)}</span></div>`;
-  const soon=S.goals.filter(g=>g.status==='active').flatMap(g=>g.tasks.filter(t=>!t.done&&t.deadline).map(t=>({g,t}))).sort((a,b)=>a.t.deadline.localeCompare(b.t.deadline)).slice(0,4);
-  if(soon.length){
-    h+=`<h2 class="sec"><span>Coming up</span></h2><div class="list">`+soon.map(x=>`<div class="item rip" data-act="open" data-id="${x.g.id}"><div class="sp"><div class="t">${esc(x.t.title)}</div><div class="meta">${esc(x.g.category)}</div></div><div class="meta" style="margin:0">${due(x.t.deadline)}</div></div>`).join('')+'</div>';
-  }
-  if(act.length)h+=`<h2 class="sec"><span>Today's win</span></h2><textarea id="win" placeholder="What went well today? Even a small thing counts.">${esc(S.wins[T]||'')}</textarea>`;
+    heroHop=false;return h;
+  };
+  R.actions=()=>hab.length?habitSection(hab,rest,T):(rest.length?`<div class="mute" style="margin-top:14px">Resting today: ${rest.map(g=>esc(g.habit)).join(', ')}</div>`:'');
+  R.nudge=()=>nudgeHTML(act,T);
+  R.checkin=()=>act.length?checkinHTML(T):'';
+  R.upcoming=()=>{
+    const soon=act.flatMap(g=>g.tasks.filter(t=>!t.done&&t.deadline).map(t=>({g,t}))).sort((a,b)=>a.t.deadline.localeCompare(b.t.deadline)).slice(0,3);
+    return soon.length?`<h2 class="sec"><span>Coming up</span></h2><div class="list">`+soon.map(x=>`<div class="item rip" data-act="open" data-id="${x.g.id}"><div class="sp"><div class="t">${esc(x.t.title)}</div><div class="meta">${esc(x.g.category)}</div></div><div class="meta" style="margin:0">${due(x.t.deadline)}</div></div>`).join('')+'</div>':'';
+  };
+  R.extras=()=>todayPlanCard()+(window.VB?VB.todayCard():'');
+  R.win=()=>act.length?`<h2 class="sec"><span>Today's win</span></h2><textarea id="win" placeholder="What went well today? Even a small thing counts.">${esc(S.wins[T]||'')}</textarea>`:'';
+  R.level=()=>{if(!act.length)return '';const L=lvl();return `<div class="lvl rip" data-act="tab" data-v="profile"><div class="badge">${L.n}</div><div class="sp"><div style="font-weight:700;font-size:16px">${L.title}</div><div class="mute">${L.toNext} XP to level ${L.n+1}</div><div class="xpbar"><i style="width:${L.pct}%"></i></div></div><span class="chev" style="color:var(--mute)">${ic('chev',18)}</span></div>`};
+  R.quote=()=>`<p class="quote">${esc(quote())}</p>`;
+  let h=timerBanner();
+  cfg.order.forEach(id=>{if(!cfg.off[id]&&R[id])h+=R[id]()});
   if(!S.goals.length)h+=`<div class="empty">${frogSVG()}<h3>Start with one goal</h3>Write it as if it is already true, then add a deadline.<br><br><button class="btn" data-act="newgoal">${ic('plus')}Add your first goal</button></div>`;
+  h+=`<button class="tcust rip" data-act="tcustom">${ic('sliders',16)}Customize this screen</button>`;
   return h;
+}
+function todayEditor(){
+  const ov=document.createElement('div');ov.className='overlay';
+  const close=()=>{ov.classList.add('out');setTimeout(()=>ov.remove(),230);save();render()};ov._close=close;
+  const draw=()=>{
+    const c=tcfg(),sub=[['mood','Mood faces'],['water','Water'],['sleep','Sleep'],['weight','Weight']];
+    const tg=(e,id,on,t,sm)=>`<div class="srow"><div class="sl"><b>${t}</b>${sm?`<small>${sm}</small>`:''}</div><button class="tgl ${on?'on':''}" data-e="${e}" data-id="${id}" role="switch" aria-checked="${!!on}" aria-label="${esc(t)}"></button></div>`;
+    ov.innerHTML=`<div class="sheet"><div class="grab"></div><h2 style="margin:6px 0 4px">Customize Today</h2><p class="mute" style="line-height:1.5">Show what you need, hide the rest and move sections up or down. Your daily actions can sit wherever suits you.</p>
+    <div class="cd" style="margin-top:14px">${c.order.map((id,i)=>{const x=TSEC.find(y=>y[0]===id);return `<div class="srow edrow"><div class="sl"><b>${esc(x[1])}</b><small>${esc(x[2])}</small></div><button class="kb ar-u" data-e="up" data-id="${id}" ${i?'':'disabled'} aria-label="Move up">${ic('chev',18)}</button><button class="kb ar-d" data-e="down" data-id="${id}" ${i<c.order.length-1?'':'disabled'} aria-label="Move down">${ic('chev',18)}</button><button class="tgl ${c.off[id]?'':'on'}" data-e="tog" data-id="${id}" role="switch" aria-checked="${!c.off[id]}" aria-label="Show ${esc(x[1])}"></button></div>`}).join('')}</div>
+    <h2 class="sec"><span>Inside the daily check-in</span></h2><div class="cd">${sub.map(x=>tg('sub',x[0],!c.off[x[0]],x[1])).join('')}</div>
+    <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap"><button class="btn rip" data-e="done">Done</button><button class="btn soft rip" data-e="reset">Reset to default</button></div></div>`;
+  };
+  document.body.appendChild(ov);draw();
+  ov.addEventListener('click',e=>{
+    if(e.target===ov){close();return}
+    const b=e.target.closest('[data-e]');if(!b||b.disabled)return;
+    const t=S.ui.today,c=tcfg(),id=b.dataset.id,k=b.dataset.e;haptic(8);
+    if(k==='done'){close();return}
+    if(k==='reset'){delete t.order;delete t.off;draw();return}
+    t.order=c.order;t.off=c.off;
+    if(k==='up'||k==='down'){const i=t.order.indexOf(id),j=i+(k==='up'?-1:1);if(j>=0&&j<t.order.length){[t.order[i],t.order[j]]=[t.order[j],t.order[i]]}}
+    else if(k==='tog'||k==='sub'){if(t.off[id])delete t.off[id];else t.off[id]=1}
+    save(false);draw();
+  });
 }
 function chipLabel(g){
   let s=(g.title||'').replace(/^I (am|have|run|read|speak|save|grow) /i,'').replace(/[.,;]+$/,'');
@@ -1997,7 +2121,8 @@ function vPlan(){
 
 function vInsights(){
   const L=lvl(),st=stats(),T=today();
-  let h=`<div class="lvl" style="margin-top:4px"><div class="badge">${L.n}</div><div class="sp"><div style="font-weight:700;font-size:18px">${L.title}</div><div class="mute">${L.xp} XP, ${L.toNext} to level ${L.n+1}</div><div class="xpbar"><i style="width:${L.pct}%"></i></div></div></div>`;
+  let h=`<button class="btn soft sm rip" data-act="tab" data-v="profile">${ic('back',16)}Profile</button><div class="sp0"></div>`;
+  h+=`<div class="lvl" style="margin-top:4px"><div class="badge">${L.n}</div><div class="sp"><div style="font-weight:700;font-size:18px">${L.title}</div><div class="mute">${L.xp} XP, ${L.toNext} to level ${L.n+1}</div><div class="xpbar"><i style="width:${L.pct}%"></i></div></div></div>`;
   h+=`<div class="tiles"><div class="tile"><b>${st.frogs}</b><span>Frogs eaten</span></div><div class="tile"><b>${st.tasks}</b><span>Tasks done</span></div><div class="tile"><b>${Math.floor(st.focus/60)}h ${st.focus%60}m</b><span>Focus time</span></div><div class="tile"><b>${st.best}</b><span>Best streak, days</span></div></div>`;
   const days=[],counts=[];for(let i=6;i>=0;i--){const d=addDays(T,-i);days.push(d);counts.push(act(d))}
   const mx=Math.max(1,...counts);
@@ -2022,15 +2147,15 @@ function vInsights(){
 const NAVC={vocab:'var(--teal)',today:'var(--go)',planner:'var(--sky)',goals:'var(--koi)',plan:'var(--vio)',insights:'var(--sun)',profile:'var(--pink)'};
 const CATCOL={Health:'var(--koi)',Learning:'var(--sky)',Skills:'var(--vio)',Career:'var(--sun)',Money:'var(--teal)',Relationships:'var(--pink)',Personal:'var(--frog)',Other:'var(--mute)'};
 const catChip=c=>`<span class="cat" style="--cc:${CATCOL[c]||'var(--mute)'}">${esc(c)}</span>`;
-const NAV=[['today','leaf','Today'],['planner','table','Planner'],['goals','target','Goals'],['plan','route','Steps'],['vocab','book','Vocab'],['insights','chart','Insights'],['profile','user','Profile']];
+const NAV=[['today','leaf','Today'],['planner','table','Planner'],['goals','target','Goals'],['plan','route','Steps'],['vocab','book','Vocab'],['profile','user','Profile']];
 document.getElementById('nav').insertAdjacentHTML('beforeend',NAV.map(n=>`<button data-v="${n[0]}" class="rip">${ic(n[1])}${n[2]}</button>`).join(''));
 const TITLES={vocab:['Vocab','Words that stay with you'],today:['',''],goals:['Goals','Written, dated, prioritized'],plan:['Steps','Priority and sequence'],planner:['Planner','Your day and week, hour by hour'],insights:['Insights','Your progress, level and badges'],profile:['Profile','You, your progress and settings']};
 function render(animate){
   const m=document.getElementById('main'),key=view+'|'+(detail||'');
   const enter=animate||key!==lastKey;lastKey=key;
-  const idx=NAV.findIndex(n=>n[0]===view);
+  const navV=view==='insights'?'profile':view,idx=NAV.findIndex(n=>n[0]===navV);
   const nav=document.getElementById('nav');nav.style.setProperty('--i',idx);
-  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===view));
+  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   {const c=detail&&goalById(detail)?goalColor(goalById(detail)):NAVC[view]||'var(--go)';nav.style.setProperty('--tc',NAVC[view]||'var(--go)');document.documentElement.style.setProperty('--vc',c)}
   const fab=document.getElementById('fab');
   const showFab=(view==='today'||view==='goals')&&!detail;
@@ -2130,6 +2255,7 @@ function navBack(){
   if(ov){if(ov._close)ov._close();else{ov.classList.add('out');setTimeout(()=>ov.remove(),230)}return true}
   if(detail){detail=null;render(true);return true}
   if(view==='vocab'&&window.VB&&VB.back&&VB.back())return true;
+  if(view==='insights'){go('profile');return true}
   if(view!=='today'){go('today');return true}
   return false;
 }
@@ -2857,13 +2983,17 @@ function vProfile(){
   const earned=BADGES.filter(b=>S.badges[b[0]]),R=S.remind||{};
   const tg=(act,on,t,s)=>`<div class="srow"><div class="sl"><b>${t}</b>${s?`<small>${s}</small>`:''}</div><button class="tgl ${on?'on':''}" data-act="${act}" data-v="${on?0:1}" role="switch" aria-checked="${!!on}" aria-label="${esc(t)}"></button></div>`;
   let h=accountPanel();
+  h+=`<button class="inscard rip" data-act="tab" data-v="insights"><span class="ci">${ic('chart',22)}</span><span class="sp"><b>Insights</b><small>Progress, mood, focus time, calendar and badges</small></span><span class="chev">${ic('chev',18)}</span></button>`;
   h+=`<div class="grp"><div class="gl">Your progress</div><div class="tiles" style="margin-top:0"><div class="tile"><b>${st.frogs}</b><span>Frogs eaten</span></div><div class="tile"><b>${overallStreak()}</b><span>Day streak, best ${st.best}</span></div><div class="tile"><b>${st.tasks}</b><span>Tasks done</span></div><div class="tile"><b>${Math.floor(st.focus/60)}h ${st.focus%60}m</b><span>Focus time</span></div></div>
     <div class="cd" style="margin-top:10px"><div class="srow"><div class="sl"><b>${n('active')} active, ${n('done')} achieved</b><small>${n('draft')} draft${n('draft')===1?'':'s'}, ${n('paused')} paused. ${S.freezes} streak freeze${S.freezes===1?'':'s'} saved.</small></div></div>${heatHTML()}
     <div class="bstrip">${BADGES.map(b=>`<div class="ico ${S.badges[b[0]]?'':'lk'}" title="${esc(b[1])}">${ic(S.badges[b[0]]?b[4]:'lock')}</div>`).join('')}</div>
-    <div class="srow"><div class="sl"><b>${earned.length} of ${BADGES.length} badges</b></div><button class="btn soft sm rip" data-act="tab" data-v="insights">Insights</button><button class="btn sm rip" data-act="share">${ic('share',16)}Share</button></div></div></div>`;
+    <div class="srow"><div class="sl"><b>${earned.length} of ${BADGES.length} badges</b></div><button class="btn sm rip" data-act="share">${ic('share',16)}Share</button></div></div></div>`;
   h+=`<div class="grp"><div class="gl">Appearance</div><div class="cd">
     <div class="srow"><div class="sl"><b>Theme</b></div><div class="mseg">${[['auto','Auto'],['dark','Dark'],['amoled','AMOLED'],['light','Light']].map(a=>`<button class="${S.theme===a[0]?'on':''}" data-act="theme" data-v="${a[0]}">${a[1]}</button>`).join('')}</div></div>
     <div class="srow"><div class="sl"><b>Accent color</b></div><div class="swrow">${Object.keys(ACC).map(k=>`<button class="${S.accent===k?'on':''}" data-act="acc" data-v="${k}" style="background:${ACC[k][0]}" aria-label="${k}"></button>`).join('')}</div></div>
+    <div class="srow"><div class="sl"><b>Glass effect</b><small>How frosted the cards look</small></div><div class="mseg">${[['0','Off'],['1','Soft'],['2','Rich']].map(a=>`<button class="${String(S.ui.glass==null?1:S.ui.glass)===a[0]?'on':''}" data-act="uiglass" data-v="${a[0]}">${a[1]}</button>`).join('')}</div></div>
+    <div class="srow"><div class="sl"><b>Density</b><small>Compact fits more on screen</small></div><div class="mseg">${[['cozy','Cozy'],['compact','Compact']].map(a=>`<button class="${(S.ui.density||'cozy')===a[0]?'on':''}" data-act="uidens" data-v="${a[0]}">${a[1]}</button>`).join('')}</div></div>
+    <button class="srow" data-act="tcustom">${ic('sliders')}<span class="sl"><b>Customize Today screen</b><small>Choose what shows and in what order</small></span></button>
     ${tg('hap',S.haptics,'Vibration','Small taps when you tick things off')}
     ${tg('snd',S.sound,'Sound effects','Short sounds inside the app')}</div></div>`;
   h+=`<div class="grp"><div class="gl">Notifications</div><div class="cd">
@@ -2892,6 +3022,11 @@ function extraAct(a,el,id,gid){
   const g=id?goalById(id):null;
   if(a==='gmenu'){const x=goalById(id);if(x)goalMenu(x);return true}
   if(a==='skipt'){if(g)skipSheet(g);return true}
+  if(a==='tcustom'){todayEditor();return true}
+  if(a==='ckt'){S.ui.ck=!S.ui.ck;save(false);render();return true}
+  if(a==='nudgemore'){nudgeOpen=!nudgeOpen;render();return true}
+  if(a==='uiglass'){S.ui.glass=+el.dataset.v;save();applyUI();render();haptic(8);return true}
+  if(a==='uidens'){S.ui.density=el.dataset.v;save();applyUI();render();haptic(8);return true}
   if(a==='addnote'){if(g)noteSheet(g);return true}
   if(a==='delnote'){const x=goalById(gid);if(x){x.notes=x.notes.filter(n=>n.id!==id);save();render()}return true}
   if(a==='th'){habitTap(id);return true}
@@ -3919,16 +4054,17 @@ function qOfDay(){
   const pm=new Date().getHours()>=17,pool=QS.filter(q=>q[2]===(pm?'pm':'am')),n=Math.floor(new Date(today()+'T00:00:00').getTime()/864e5);
   return pool[n%pool.length];
 }
-function coachCards(){
+function coachParts(){
   const T=today(),one=S.one[T],j=S.journal[T],q=qOfDay();
-  let h='<div class="coachrow">';
-  h+=one&&one.t?`<div class="coach one ${one.done?'done':''}"><button class="pck ${one.done?'on':''}" data-act="onedone" aria-label="Mark done" aria-pressed="${!!one.done}">${ic('check',18)}</button><button class="cb rip" data-act="oneset"><small>Your ONE thing today</small><b>${esc(one.t)}</b></button></div>`
+  const P={};
+  P.one=one&&one.t?`<div class="coach one ${one.done?'done':''}"><button class="pck ${one.done?'on':''}" data-act="onedone" aria-label="Mark done" aria-pressed="${!!one.done}">${ic('check',18)}</button><button class="cb rip" data-act="oneset"><small>Your ONE thing today</small><b>${esc(one.t)}</b></button></div>`
    :`<button class="coach rip" data-act="oneset"><span class="ci">${ic('target',20)}</span><span class="cb"><small>The ONE Thing</small><b>What is the one thing that makes everything else easier today?</b></span></button>`;
-  h+=j&&j.a?`<button class="coach q rip" data-act="qans"><span class="ci">${ic('note',20)}</span><span class="cb"><small>Reflection saved</small><b>${esc(short(j.q,90))}</b><span class="mute">${esc(short(j.a,110))}</span></span></button>`
+  P.q=j&&j.a?`<button class="coach q rip" data-act="qans"><span class="ci">${ic('note',20)}</span><span class="cb"><small>Reflection saved</small><b>${esc(short(j.q,90))}</b><span class="mute">${esc(short(j.a,110))}</span></span></button>`
    :`<button class="coach q rip" data-act="qans"><span class="ci">${ic('bulb',20)}</span><span class="cb"><small>Question of the ${new Date().getHours()>=17?'evening':'day'}</small><b>${esc(q[0])}</b><span class="mute">${esc(q[1])}. Tap to answer.</span></span></button>`;
-  h+=planTomorrowCard()+masterCard();
-  return h+'</div>';
+  P.pt=planTomorrowCard();P.master=masterCard();
+  return P;
 }
+function coachCards(){const P=coachParts();return '<div class="coachrow">'+P.one+P.q+P.pt+P.master+'</div>'}
 function oneSheet(){
   const T=today(),o=S.one[T];
   sheet('Your ONE thing today',[
