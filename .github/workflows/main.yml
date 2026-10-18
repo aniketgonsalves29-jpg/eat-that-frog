@@ -1,65 +1,111 @@
 name: Build Android APK
-
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
-  build:
+  apk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
+      - name: Unpack the project (files already in the repo win)
+        run: unzip -nq eat-that-frog-android-project.zip
+      - name: Use a fixed signing key so updates install over the old app
+        run: |
+          echo "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" | base64 -d > android/app/frog.keystore
+          cat >> android/app/build.gradle <<'EOF'
 
-      - uses: actions/setup-node@v5
+          android {
+              signingConfigs {
+                  debug {
+                      storeFile file('frog.keystore')
+                      storePassword 'android'
+                      keyAlias 'androiddebugkey'
+                      keyPassword 'android'
+                  }
+              }
+          }
+          EOF
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
-
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Create the Android project if it is missing
+      - name: Prepare Android SDK
         run: |
-          if [ ! -f android/gradlew ]; then
-            echo "No Android project found, creating one"
-            if [ -f android/app/google-services.json ]; then cp android/app/google-services.json /tmp/google-services.json; fi
-            rm -rf android
-            npx cap add android
-            if [ -f /tmp/google-services.json ]; then cp /tmp/google-services.json android/app/google-services.json; fi
-          fi
-
-      - name: Sync web app into Android project
-        run: npx cap sync android
-
-      - name: Use a fixed signing key so new builds install over the old app
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" > /dev/null || true
+      - name: Install app dependencies and Google sign-in plugins
         run: |
-          mkdir -p ~/.android
-          echo "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" | base64 -d > ~/.android/debug.keystore
-
-      - name: Build debug APK
+          npm install --no-audit --no-fund
+          npm install --no-audit --no-fund @capacitor-firebase/authentication@8.5.2 @capacitor/share@8.0.3 @capacitor/filesystem@8.1.4 @capacitor-mlkit/barcode-scanning@8.2.1
+      - name: Configure Google sign-in
+        run: |
+          node -e "
+          const fs=require('fs');const c=JSON.parse(fs.readFileSync('capacitor.config.json'));
+          c.plugins=Object.assign(c.plugins||{},{
+            FirebaseAuthentication:{skipNativeAuth:false,providers:['google.com']},
+            CapacitorHttp:{enabled:true}});
+          fs.writeFileSync('capacitor.config.json',JSON.stringify(c,null,2));"
+          sed -i 's/^ext {/ext {\n    rgcfaIncludeGoogle = true/' android/variables.gradle
+          grep -n rgcfaIncludeGoogle android/variables.gradle
+          sed -i 's/android:allowBackup="true"/android:allowBackup="false"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/<application/<application android:usesCleartextTraffic="false"/' android/app/src/main/AndroidManifest.xml
+          grep -n "allowBackup\|usesCleartext" android/app/src/main/AndroidManifest.xml
+          node -e "
+          const fs=require('fs');let id='';
+          try{id=JSON.parse(fs.readFileSync('android/app/google-services.json')).project_info.project_id}catch(e){}
+          fs.writeFileSync('www/cloud-config.js','window.CLOUD='+JSON.stringify({projectId:id})+';');"
+          cat www/cloud-config.js
+      - name: Create reminder sounds and alarm permission
+        run: |
+          cat > make_sounds.py <<'PY'
+          import wave,struct,math,random,os,sys
+          out=sys.argv[1];os.makedirs(out,exist_ok=True);R=22050
+          def env(t,a,d):return min(1,t/.008)*math.exp(-t/d) if t<a else 0
+          def render(name,notes,total):
+              n=int(R*total);buf=[0.0]*n
+              for f,st,dur,kind,amp in notes:
+                  for i in range(int(R*dur)):
+                      t=i/R;idx=int(R*st)+i
+                      if idx>=n:break
+                      ph=2*math.pi*f*t
+                      w=math.sin(ph) if kind=='sine' else (1 if math.sin(ph)>=0 else -1)*.5 if kind=='square' else (2/math.pi)*math.asin(math.sin(ph))
+                      buf[idx]+=w*amp*min(1,t/.006)*math.exp(-t/(dur/3.2))
+              m=max(1e-6,max(abs(x) for x in buf));
+              with wave.open(os.path.join(out,name+'.wav'),'wb') as w:
+                  w.setnchannels(1);w.setsampwidth(2);w.setframerate(R)
+                  w.writeframes(b''.join(struct.pack('<h',int(max(-1,min(1,x/m*.85))*32767)) for x in buf))
+          render('chime',[(784,0,.5,'sine',1),(988,.16,.5,'sine',1),(1175,.32,.9,'sine',1)],1.4)
+          render('bell',[(880,0,1.6,'sine',1),(2430,0,.8,'sine',.5),(3500,0,.4,'sine',.25)],1.8)
+          render('harp',[(523,0,.7,'tri',1),(659,.14,.7,'tri',1),(784,.28,.7,'tri',1),(1047,.42,1.0,'tri',1)],1.6)
+          render('pop',[(500,0,.12,'sine',1),(800,.08,.2,'sine',1)],.4)
+          render('drum',[(110,0,.5,'sine',1),(110,.4,.5,'sine',1)],1.0)
+          render('alert',[(880,0,.2,'square',1),(660,.22,.2,'square',1),(880,.44,.2,'square',1),(660,.66,.2,'square',1)],1.0)
+          PY
+          python3 make_sounds.py android/app/src/main/res/raw
+          ls -la android/app/src/main/res/raw
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          grep -q 'android.permission.CAMERA' android/app/src/main/AndroidManifest.xml || sed -i 's#</manifest>#    <uses-permission android:name="android.permission.CAMERA"/>\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          grep -q 'com.google.mlkit.vision.DEPENDENCIES' android/app/src/main/AndroidManifest.xml || sed -i 's#</application>#    <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>\n    </application>#' android/app/src/main/AndroidManifest.xml
+          grep -n "CAMERA\|DEPENDENCIES" android/app/src/main/AndroidManifest.xml
+          grep -n "EXACT_ALARM" android/app/src/main/AndroidManifest.xml
+      - run: npx cap sync android
+      - run: chmod +x android/gradlew
+      - run: ./gradlew assembleDebug --no-daemon
         working-directory: android
-        run: |
-          chmod +x ./gradlew
-          ./gradlew assembleDebug --no-daemon
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: eat-that-frog-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Publish as the "Latest build" release
+      - name: Publish the APK on the Releases page
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cp android/app/build/outputs/apk/debug/app-debug.apk eat-that-frog.apk
           gh release delete latest --yes --cleanup-tag || true
-          gh release create latest eat-that-frog.apk --title "Latest build" --target "${{ github.sha }}" --notes "Built from commit ${{ github.sha }}. Download eat-that-frog.apk and install it on your phone."
+          gh release create latest eat-that-frog.apk --title "Latest build" --notes "Built from commit ${GITHUB_SHA::7}" --latest
