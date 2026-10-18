@@ -1066,6 +1066,49 @@ html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--go) 50%,transp
 :root[data-density=compact] .coach,:root[data-density=compact] .note-card{padding:10px 12px}
 :root[data-density=compact] main{padding-top:2px}
 @media (prefers-reduced-motion:reduce){.nmore,.ck-h .chev{transition:none}}
+
+/* word sheet: meaning first */
+.mblk{margin-top:14px}
+.mblk>small{display:block;color:var(--mute);font-size:12.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.mblk .vbm{margin-top:4px;font-size:18px;padding:8px 16px}
+.vbsimple{margin:10px 0 0;font-size:17.5px;line-height:1.5;font-weight:560;color:var(--ink)}
+.hing{color:var(--go);font-weight:650;font-size:16.5px;margin-top:2px}
+.vbexhi{font-size:16px;line-height:1.55;color:var(--ink);margin-top:2px}
+#vbexhi{margin:-4px 0 10px 17px}
+.vbex{font-size:17px}
+
+/* ===== scroll lock + word sheet typography ===== */
+html.lock,html.lock body{overflow:hidden;overscroll-behavior:none}
+.overlay{overscroll-behavior:contain;touch-action:none}
+.sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scrollbar-gutter:stable both-edges}
+.overlay.ged{touch-action:pan-y}
+.sheet{padding:10px 18px calc(28px + var(--bot))}
+.vbhd{gap:12px;margin-top:2px;align-items:center}
+.vbwd{font-weight:780;letter-spacing:-.035em;line-height:1.02}
+.vbhd .mute{font-size:15px;margin-top:6px;letter-spacing:.01em}
+.vbhd .cat{margin-top:8px}
+.mblk,.vbhin{background:color-mix(in srgb,var(--s2) 52%,transparent);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:13px 16px 15px;margin-top:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.mblk>small,.vbhin>small{display:block;color:var(--mute);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:0 0 8px}
+.mblk .vbm{margin:0;padding:7px 16px;font-size:19px;letter-spacing:-.01em}
+.vbsimple{margin:12px 0 0;font-size:17.5px;line-height:1.55;font-weight:540}
+.mblk .vbd{margin:0;font-size:16.5px;line-height:1.6;color:color-mix(in srgb,var(--ink) 78%,var(--mute))}
+.vbhin div[lang]{font-size:21px;line-height:1.45;font-weight:650}
+.hing{font-size:17px;margin-top:4px;letter-spacing:.005em}
+.vbex{border-left:3px solid var(--go);padding:2px 0 2px 14px;margin:0 0 10px;font-size:17.5px;line-height:1.6;font-weight:520}
+#vbexhi{margin:0 0 0 17px}
+.vbexhi{font-size:17px;line-height:1.55;margin-top:2px}
+.vbkn{margin-top:18px;gap:10px}
+.vbkn .btn{padding:13px 12px}
+.vbqb{margin-top:18px!important}
+.vbqb>small{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.sheet h2.sec{margin:26px 0 10px;font-size:18px}
+.sheet textarea{border-radius:16px;padding:13px 15px;min-height:84px;line-height:1.55;font-size:16px}
+.vbtr{margin-top:12px;gap:10px}
+.vbsyn{margin-top:18px}
+.vbsyn small{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.vbsyn .cp{padding:8px 14px}
+.vbout{margin-top:10px;line-height:1.55}
+.sheet p{line-height:1.6}
 </style>
 </head>
 <body>
@@ -2247,6 +2290,14 @@ document.getElementById('main').addEventListener('change',e=>{
 });
 // Android back button / swipe
 history.replaceState({r:1},'');history.pushState({r:2},'');
+
+/* lock the page behind sheets and dialogs */
+(function(){
+  const sel='.overlay:not(.out),.focus:not(.out),.scanov:not(.out),.cele:not(.out)';
+  const upd=()=>document.documentElement.classList.toggle('lock',!!document.querySelector(sel));
+  new MutationObserver(upd).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  upd();
+})();
 function navBack(){
   const fo=document.querySelector('.focus:not(.out)');if(fo&&fo._close){fo._close();return true}
   const ce=document.querySelector('.cele:not(.out)');if(ce&&ce._close){ce._close();return true}
@@ -4343,7 +4394,7 @@ function norm(w,custom){
   let ex=String(w.example||'').replace(/^[“"]+|[”"]+$/g,'').trim();if(PH.test(ex))ex='';
   let syn=(Array.isArray(w.syn)?w.syn:String(w.synonyms||'').split(/[,;]/)).map(s=>String(s).trim()).filter(Boolean);
   const seen=new Set([word.toLowerCase()]);syn=syn.filter(s=>{const k=s.toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).slice(0,6);
-  return{word,meaning:w.meaning||'',definition:w.definition||'',hindi:w.hindi||'',example:ex,syn,phonetic:w.phonetic||'',pos:w.pos||w.partOfSpeech||'',custom:!!custom,meanings:w.meanings||null,ant:w.ant||[],audio:w.audio||'',origin:w.origin||'',added:w.added||''};
+  return{word,meaning:w.meaning||'',simple:w.simple||'',hinglish:w.hinglish||'',exHi:w.exHi||'',definition:w.definition||'',hindi:w.hindi||'',example:ex,syn,phonetic:w.phonetic||'',pos:w.pos||w.partOfSpeech||'',custom:!!custom,meanings:w.meanings||null,ant:w.ant||[],audio:w.audio||'',origin:w.origin||'',added:w.added||''};
 }
 const key=w=>w.word.toLowerCase();
 let wc=null,wcS=null,wcN=-1,byKey=new Map();
@@ -4399,7 +4450,9 @@ function netSpeak(t,l){
     ttsA=a;a.play().catch(()=>toast('Could not play the sound. Check volume and internet'))}
   catch(e){toast('Pronunciation needs an internet connection')}
 }
-function speak(t,l){
+async function speak(t,l){
+  const TTS=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.TextToSpeech;
+  if(TTS&&TTS.speak){try{await TTS.speak({text:t,lang:l||'en-US',rate:Math.min(1.2,Math.max(.5,(D().rate||.92))),pitch:1,volume:1,category:'ambient'});return}catch(e){}}
   if(!('speechSynthesis' in window)){netSpeak(t,l);return}
   let started=false,done=false;
   const fb=()=>{if(done)return;done=true;try{speechSynthesis.cancel()}catch(e){}netSpeak(t,l)};
@@ -4523,7 +4576,7 @@ const KEYAI=KEYO+'-ai',MODELS=[['claude-haiku-5-5','Fast and light (Haiku)'],['c
 let freeMode=false,keyless,freeNote=false;   // keyless: undefined = untested, true = built-in Claude works (chat preview), false = a key is needed
 const aiCfg=()=>{try{return JSON.parse(localStorage.getItem(KEYAI)||'{}')}catch(e){return{}}};
 const aiSave=c=>{try{localStorage.setItem(KEYAI,JSON.stringify(c))}catch(e){}};
-const AI_SYS=`You are the dictionary inside a vocabulary app for an English learner whose first language is Hindi. The user sends one English word or phrase. Reply with ONE JSON object and nothing else: no markdown, no code fences, no commentary.
+const AI_SYS=`You are the dictionary inside a vocabulary app for learners whose first language is Hindi (many read Hinglish, Hindi written in English letters). The user sends one English word or phrase. Reply with ONE JSON object and nothing else: no markdown, no code fences, no commentary.
 If the input is not a real English word or phrase, reply {"valid":false,"suggestions":["up to 5 likely intended words"]}.
 Otherwise reply with exactly this shape:
 {"valid":true,
@@ -4531,9 +4584,12 @@ Otherwise reply with exactly this shape:
 "phonetic":"IPA between slashes",
 "pos":"noun, verb, adjective, adverb, phrase and so on",
 "meaning":"the core meaning in one to three simple words, like a synonym. Example for adamant: Unyielding",
-"definition":"one short, clear sentence in simple English that explains the word, no jargon. Example: Not willing to change your mind or decision.",
+"simple":"explain it the way you would to a friend who has never heard the word: plain everyday words, one sentence, at most 18 words. Example: Someone who will not change their mind, however much you try.",
+"definition":"the proper dictionary definition: one precise sentence in clear English. Example: Refusing to be persuaded or to change one's mind.",
 "hindi":"the meaning in Hindi, Devanagari script, one to three short phrases separated by ' / '. Example: अडिग / ज़िद पर अड़ा हुआ",
-"example":"one natural sentence that uses the word",
+"hinglish":"the same Hindi meaning written in Roman letters the way an Indian would text it. Example: adig / zid par ada hua",
+"example":"one natural, vivid everyday sentence that uses the word so its meaning is obvious from context",
+"example_hindi":"that example sentence translated into natural Hindi, Devanagari script",
 "synonyms":["four to six similar words"]}
 Keep everything short and easy to understand.`;
 async function sampleText(q){
@@ -4570,7 +4626,7 @@ async function aiEntry(q,cfg){
   try{d=JSON.parse(txt.slice(a,b+1))}catch(err){const e=new Error('ai');e.ai={fatal:false,msg:'The AI sent an answer in an unexpected shape. Try again.'};throw e}
   if(d.valid===false||(!d.word&&!d.definition)){const e=new Error('nf');e.nf=true;e.sug=(d.suggestions||[]).filter(x=>typeof x==='string').slice(0,6);throw e}
   const arr=x=>Array.isArray(x)?x.map(String).map(y=>y.trim()).filter(Boolean):[];
-  const w=norm({word:String(d.word||q).trim(),meaning:d.meaning||'',definition:d.definition||'',example:d.example||'',hindi:d.hindi||'',syn:arr(d.synonyms),phonetic:d.phonetic||'',pos:d.pos||''});
+  const w=norm({word:String(d.word||q).trim(),meaning:d.meaning||'',definition:d.definition||'',example:d.example||'',hindi:d.hindi||'',simple:d.simple||'',hinglish:d.hinglish||'',exHi:d.example_hindi||'',syn:arr(d.synonyms),phonetic:d.phonetic||'',pos:d.pos||''});
   w.ai=true;return w;
 }
 /* ---------- online dictionary: three sources, merged (free fallback) ---------- */
@@ -4623,6 +4679,36 @@ async function core(q,withMuse){
   if(x&&withMuse){x.syn=(ok(3)||[]).map(y=>y.word);x.ant=(ok(4)||[]).map(y=>y.word)}
   return{x,net,why};
 }
+async function museExtra(w){
+  try{
+    const e=encodeURIComponent(w.word.toLowerCase());
+    const [a,b]=await Promise.allSettled([J('https://api.datamuse.com/words?max=10&rel_syn='+e,4000),J('https://api.datamuse.com/words?max=10&rel_ant='+e,4000)]);
+    const syn=a.status==='fulfilled'?a.value.map(y=>y.word):[],ant=b.status==='fulfilled'?b.value.map(y=>y.word):[];
+    const ns=uniq([...(w.syn||[]),...syn]).slice(0,10),na=uniq([...(w.ant||[]),...ant]).slice(0,10);
+    if(ns.length!==(w.syn||[]).length||na.length!==(w.ant||[]).length){w.syn=ns;w.ant=na;if(curW===w&&$('.overlay.vbw:not(.out)'))refreshSheet()}
+  }catch(e){}
+}
+async function quickEntry(q,my,show){
+  const k=q.toLowerCase(),cfg=aiCfg(),useAI=!!cfg.key||(!freeMode&&keyless!==false);
+  let aiDone=false,lastErr=null,coreRes=null;
+  const cur=()=>my===lookTok&&!!$('.overlay.vbw:not(.out)');
+  const pAI=useAI?aiEntry(q,cfg.key?cfg:{}).then(w=>{
+    aiDone=true;const wk=w.word.toLowerCase();if(!cfg.key)keyless=true;if(wk!==k)w.base=q;
+    online[wk]=w;online[k]=w;saveOnline();if(cur())show(w);return w;
+  }).catch(e=>{lastErr=e;if(!cfg.key&&e&&e.ai&&e.ai.code&&e.ai.code!==429&&e.ai.code<500)keyless=false;return null}):Promise.resolve(null);
+  const pFree=(async()=>{
+    let r=await core(q,false);coreRes=r;let w=null;
+    if(r.x)w=buildEntry(q,r.x);
+    else if(!r.net){for(const s2 of stems(q)){const rr=await core(s2,false);if(rr.x){w=buildEntry(s2,rr.x);w.base=q;break}}}
+    if(w){if(!aiDone&&cur())show(w);museExtra(w)}
+    return w;
+  })().catch(()=>null);
+  const [a,f]=await Promise.all([pAI,pFree]);
+  const w=a||f;
+  if(w){if(!a){online[k]=w;saveOnline()}return w}
+  if(lastErr&&(lastErr.nf||(lastErr.ai&&lastErr.ai.fatal)))throw lastErr;
+  const net=!!(coreRes&&coreRes.net),e=new Error(net?'net':'nf');e.nf=!net;e.net=net;e.why=coreRes&&coreRes.why;throw e;
+}
 async function fetchEntry(q){
   q=q.trim();const k=q.toLowerCase();
   if(online[k]&&online[k].meanings)return online[k];
@@ -4665,9 +4751,11 @@ async function trWord(text,lang){
     tcache[ck]=tx;saveTr();return tx;
   }finally{clearTimeout(t)}
 }
-function playAudio(w){
-  const ext=w.audio?w:(online[key(w)]||{});
-  if(ext.audio){try{const a=new Audio(ext.audio);a.play().catch(()=>speak(w.word));return}catch(e){}}
+async function playAudio(w){
+  haptic(8);
+  let url=w.audio||(online[key(w)]||{}).audio||audioC[key(w)];
+  if(url===undefined)url=await Promise.race([audioFor(w),new Promise(r=>setTimeout(()=>r(''),1400))]);
+  if(url){try{const a=new Audio(url);a.preload='auto';await a.play();return}catch(e){}}
   speak(w.word);
 }
 
@@ -4695,22 +4783,116 @@ function detail(w){
   const k=key(w),sv=D().saved.includes(k),note=D().notes[k]||'',c=wcol(w),tg=tagOf(w),bk=bookName(w);
   const lname=(LANGS.find(l=>l[0]===D().lang)||LANGS[0])[1];
   let h=`<div class="vbhd"><div class="sp"><h2 class="vbwd" style="font-size:${fs(w.word,42)}px">${esc(w.word)}</h2>${w.phonetic?`<div class="mute">${esc(w.phonetic)}</div>`:''}${w.pos?`<span class="cat" style="--cc:var(${c})">${esc(w.pos)}</span>`:''}</div><button class="kb" data-vb="say" aria-label="Hear pronunciation" style="background:var(--s2);color:var(--go)">${ic('volume')}</button></div>`;
-  if(w.meaning)h+=`<div class="vbm" style="--c:var(${c})">${esc(w.meaning)}</div>`;
-  if(w.definition)h+=`<p class="vbd">${esc(w.definition)}</p>`;
-  h+=w.hindi?`<div class="panel vbhin"><small class="mute">In Hindi</small><div lang="hi">${esc(w.hindi)}</div></div>`:`<div class="panel vbhin" id="vbwt" hidden><small class="mute">In ${lname}</small><div id="vbwtx"></div></div>`;
+  const hi=w.hindi||'',hing=w.hinglish||hinglishOf(hi),main=w.simple||'';
+  h+=`<div class="mblk"><small>Meaning</small>${w.meaning?`<div class="vbm" style="--c:var(${c})">${esc(w.meaning)}</div>`:''}${main?`<p class="vbsimple">${esc(main)}</p>`:''}</div>`;
+  if(w.definition)h+=`<div class="mblk"><small>${main?'Proper definition':'Definition'}</small><p class="vbd" style="margin-top:4px">${esc(w.definition)}</p></div>`;
+  h+=`<div class="panel vbhin" id="vbhin"><small class="mute">In Hindi and Hinglish</small>${hi?`<div lang="hi">${esc(hi)}</div><div class="hing">${esc(hing)}</div>`:`<div class="mute" style="font-size:14px;font-weight:500">Translating…</div>`}</div>`;
+  if(D().lang!=='hi')h+=`<div class="panel vbhin" id="vbwt" hidden><small class="mute">In ${lname}</small><div id="vbwtx"></div></div>`;
+  h+=`<div class="mblk"><small>Example</small>${w.example?`<div class="vbex">${exHTML(w)}</div><div id="vbexhi">${w.exHi?`<div class="vbexhi" lang="hi">${esc(w.exHi)}</div><div class="hing">${esc(hinglishOf(w.exHi))}</div>`:''}</div>`:`<div class="mute" style="margin:6px 0 0;font-size:14px">No example yet. Write your own below.</div><div id="vbexhi"></div>`}</div>`;
   h+=`<div class="vbkn"><button class="btn soft rip" data-vb="hard">${ic('repeat',16)}Still learning</button><button class="btn rip" data-vb="know">${ic('check',16)}I know this</button></div>
   ${bookStrip(w)}
-  <h2 class="sec"><span>Use it in a sentence</span></h2>${w.example?`<div class="vbex">${exHTML(w)}</div>`:''}
+  <h2 class="sec"><span>Use it in your own sentence</span></h2>
   <textarea id="vbnote" rows="2" placeholder="Write your own sentence with ${esc(w.word)}">${esc(note)}</textarea>
   <div class="vbtr"><select id="vblang" aria-label="Translate into">${LANGS.map(l=>`<option value="${l[0]}"${l[0]===D().lang?' selected':''}>${l[1]}</option>`).join('')}</select><button class="btn soft sm rip" data-vb="tr">${ic('globe',16)}Translate</button></div><div id="vbout"></div>
   ${chipsHTML('Other ways to say it',w.syn)}
   <div style="margin-top:22px"><button class="btn rip ${sv?'soft':''}" data-vb="save" style="width:100%;justify-content:center">${ic('star',16)}<span>${sv?'Saved to my words':'Save to my words'}</span></button></div>`;
   return h;
 }
+/* ---------- Hinglish (Hindi in Roman letters) ---------- */
+const DV_C={'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'ng','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'ny','ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'f','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','क़':'q','ख़':'kh','ग़':'g','ज़':'z','ड़':'r','ढ़':'rh','फ़':'f','ळ':'l'};
+const DV_NK={'क':'q','ख':'kh','ग':'g','ज':'z','ड':'d','ढ':'dh','फ':'f'};
+const DV_V={'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ऋ':'ri','ए':'e','ऐ':'ai','ओ':'o','औ':'au','ऑ':'o'};
+const DV_M={'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','ृ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au','ॉ':'o'};
+function hinglishOf(src){
+  if(!src)return '';
+  src=String(src).normalize('NFD');
+  const word=w=>{
+    const u=[];let i=0;const ch=[...w];
+    while(i<ch.length){
+      const c=ch[i];
+      if(DV_C[c]){
+        const unit={c:DV_C[c],v:'a',inh:true,conj:false};i++;
+        if(ch[i]==='\u093C'){unit.c=DV_NK[c]||unit.c;i++}
+        while(i<ch.length){
+          const n=ch[i];
+          if(n==='्'){unit.v='';unit.inh=false;unit.conj=true;i++;break}
+          if(DV_M[n]){unit.v=DV_M[n];unit.inh=false;i++;continue}
+          if(n==='ं'||n==='ँ'){unit.nas=true;i++;continue}
+          if(n==='ः'){unit.vis=true;i++;continue}
+          break;
+        }
+        u.push(unit);
+      }else if(DV_V[c]){const unit={c:'',v:DV_V[c],inh:false};i++;
+        while(i<ch.length&&(ch[i]==='ं'||ch[i]==='ँ')){unit.nas=true;i++}
+        if(ch[i]==='ः'){unit.vis=true;i++}
+        u.push(unit)}
+      else{u.push({raw:c});i++}
+    }
+    const L=u.length;
+    if(L&&u[L-1].inh)u[L-1].v='';
+    for(let k=L-2;k>=1;k--){const x=u[k],pv=u[k-1],nx=u[k+1];if(x.inh&&x.c&&!x.nas&&nx&&(nx.v||nx.raw)&&pv&&(pv.v)&&!pv.raw&&!nx.raw&&nx.c!==undefined)x.v=''}
+    let out='';
+    u.forEach((x,k)=>{
+      if(x.raw){out+=x.raw;return}
+      let v=x.v;const last=(k===L-1);
+      if(last&&v==='aa')v='a';if(last&&v==='ee')v='i';
+      out+=x.c+v;
+      if(x.nas){const nx=u[k+1];out+=(nx&&nx.c&&/^[pbm]/.test(nx.c))?'m':'n'}
+      if(x.vis)out+='h';
+    });
+    return out;
+  };
+  return src.replace(/[ऀ-ॿ]+/g,w=>word(w));
+}
+async function exampleFor(w){
+  const k=key(w),re=new RegExp('\\b'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').slice(0,Math.max(3,k.length-2)),'i'),pick=a=>a.map(x=>String(x||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()).filter(x=>x.length>=18&&x.length<=170&&re.test(x)).sort((x,y)=>Math.abs(x.length-70)-Math.abs(y.length-70))[0]||'';
+  try{
+    const a=await J('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(k),4500);
+    const ex=pick(a.flatMap(e=>(e.meanings||[]).flatMap(m=>(m.definitions||[]).map(d=>d.example))));if(ex)return ex;
+  }catch(e){}
+  try{
+    const r=await J('https://en.wiktionary.org/api/rest_v1/page/definition/'+encodeURIComponent(k),4500);
+    const ex=pick(Object.values(r).flat().flatMap(e=>(e.definitions||[]).flatMap(d=>d.examples||d.parsedExamples&&d.parsedExamples.map(x=>x.example)||[])));if(ex)return ex;
+  }catch(e){}
+  return '';
+}
+function fillExample(w){
+  const ov=$('.overlay.vbw:not(.out)');if(!ov||curW!==w||!w.example)return;
+  const box=$('#vbexhi',ov);if(!box)return;
+  const par=box.parentNode;par.innerHTML='<small>Example</small><div class="vbex">'+exHTML(w)+'</div><div id="vbexhi"></div>';
+}
+const trText=(t,lang)=>{t=String(t||'').trim().slice(0,260);return t?trWord(t,lang):Promise.reject(0)};
+/* ---------- pronunciation: real recording first, then the phone's own voice ---------- */
+const audioC={};
+async function audioFor(w){
+  const k=key(w);if(w.audio)return w.audio;const o=online[k];if(o&&o.audio)return o.audio;
+  if(audioC[k]!==undefined)return audioC[k];
+  try{
+    const a=await J('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(k),4500);
+    const p=(a[0].phonetics||[]).map(x=>x.audio).filter(Boolean);
+    audioC[k]=https(p.find(x=>/-us\./.test(x))||p[0]||'');
+  }catch(e){audioC[k]=''}
+  return audioC[k];
+}
+function fillHindi(w){
+  const ov=$('.overlay.vbw:not(.out)');if(!ov||curW!==w)return;
+  const p=$('#vbhin',ov);
+  if(p&&w.hindi)p.innerHTML=`<small class="mute">In Hindi and Hinglish</small><div lang="hi">${esc(w.hindi)}</div><div class="hing">${esc(w.hinglish||hinglishOf(w.hindi))}</div>`;
+  else if(p&&w.hindiFail)p.innerHTML='<small class="mute">In Hindi and Hinglish</small><div class="mute" style="font-size:14px;font-weight:500">Could not translate right now. Check your internet.</div>';
+  const e=$('#vbexhi',ov);if(e&&w.exHi)e.innerHTML=`<div class="vbexhi" lang="hi">${esc(w.exHi)}</div><div class="hing">${esc(hinglishOf(w.exHi))}</div>`;
+}
 function afterOpen(w){
-  const ov=$('.overlay.vbw:not(.out)');if(!ov||w.hindi)return;
-  const lang=D().lang;
-  trWord(w.word,lang).then(tx=>{if(curW!==w)return;const p=$('#vbwt',ov);if(!p)return;p.hidden=false;$('#vbwtx',p).textContent=tx;$('#vbwtx',p).setAttribute('lang',lang)}).catch(()=>{});
+  const ov=$('.overlay.vbw:not(.out)');if(!ov)return;
+  const lang=D().lang,base=w.simple||w.meaning||shorten(w.definition,90)||w.word;
+  audioFor(w).catch(()=>{});
+  if(!w.hindi){
+    trText(w.meaning||base,'hi').then(tx=>{w.hindi=tx;w.hinglish='';fillHindi(w)}).catch(()=>{w.hindiFail=true;fillHindi(w)});
+  }
+  if(!w.example&&!w.exTried){w.exTried=true;exampleFor(w).then(e=>{if(!e)return;w.example=e;fillExample(w);if(!w.exHi)trText(e,'hi').then(tx=>{w.exHi=tx;fillHindi(w)}).catch(()=>{})}).catch(()=>{})}
+  if(w.example&&!w.exHi)trText(w.example,'hi').then(tx=>{w.exHi=tx;fillHindi(w)}).catch(()=>{});
+  if(lang!=='hi'){
+    trText(base,lang).then(tx=>{if(curW!==w)return;const p=$('#vbwt',ov);if(!p)return;p.hidden=false;const x=$('#vbwtx',p);x.textContent=tx;x.setAttribute('lang',lang)}).catch(()=>{});
+  }
 }
 function openWord(w){if(!w)return;hubBack=false;curW=w;pushRecent(w.word);sheetShow(detail(w));afterOpen(w)}
 function refreshSheet(){if(curW&&$('.overlay.vbw:not(.out)')){const keep=$('.overlay.vbw .sheet').scrollTop;sheetShow(detail(curW));$('.overlay.vbw .sheet').scrollTop=keep;afterOpen(curW)}}
@@ -4866,7 +5048,7 @@ async function lookup(q){
   const my=++lookTok;curW=null;
   sheetShow(`<div class="vbhd"><h2 class="vbwd" style="font-size:40px">${esc(q)}</h2></div><div class="vbload"><i style="width:90%"></i><i style="width:70%"></i><i style="width:82%"></i></div>`);
   try{
-    const w=await fetchEntry(q);if(my!==lookTok||!$('.overlay.vbw:not(.out)'))return;openWord(w);if(w.base&&w.word.toLowerCase()!==w.base.toLowerCase())toast('Showing “'+w.word+'”, the base form of “'+w.base+'”');
+    const w=await quickEntry(q,my,x=>openWord(x));if(my!==lookTok||!$('.overlay.vbw:not(.out)'))return;if(curW!==w)openWord(w);if(w.base&&w.word.toLowerCase()!==w.base.toLowerCase())toast('Showing “'+w.word+'”, the base form of “'+w.base+'”');
   }catch(e){
     if(my!==lookTok||!$('.overlay.vbw:not(.out)'))return;
     if(e&&e.nokey){
